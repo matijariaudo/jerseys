@@ -54,7 +54,7 @@ console.log(process.env.EMAIL_ACCOUNT,process.env.EMAIL_CLAVE)
 let mailTransporter =
 	nodemailer.createTransport(
 		{
-            host: 'smtppro.zoho.com.au',
+            host: 'smtp.gmail.com',
             port: 465,
             secure: true, // true for 465, false for other ports
 			auth: {
