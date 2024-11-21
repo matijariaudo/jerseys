@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Jersey4All</title>
+    <meta name="description" content="" />
+    <meta name="theme-color" content="#002531" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logos/favicon.png" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css?id=1" />
+    <link rel="stylesheet" href="assets/css/checkout.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
+
+    <!-- Start Header Area -->
+    <header class="header navbar-area">
+         <!-- Start Topbar -->
+        <div class="topbar p-0">
+            <div class="container">
+                <div class="row align-items-center p-1">
+                    <div class="col-lg-6 col-md-6 col-4">
+                        <div class="top-left">
+                            <ul class="menu-top-link">
+                                <li>
+                                    <div class="select-position">
+                                        <select id="select4">
+                                            <option value="0" selected>$ USD</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="select-position">
+                                        <select id="select5">
+                                            <option value="0" selected>English</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-8">
+                        <div class="top-end m-0">
+                            <div class="user user-login" style="display: none;cursor: pointer;">
+                                <li>
+                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i> <ff class="user_name"></ff> </a>
+                                </li>
+                            </div>
+                            <ul class="user-login no_user">
+                                <li>
+                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i>  Log In</a>
+                                </li>
+                                <li>
+                                    <a href="/register">Create account</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <!-- Start Header Middle -->
+        <div class="header-middle">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-7 p-1">
+                        <!-- Start Header Logo -->
+                        <a class="navbar-brand" href="/">
+                            <img src="assets/images/logos/logochina.png" alt="Logo" style="width: 100%;">
+                        </a>
+                        <!-- End Header Logo -->
+                    </div>
+                    <div class="col-lg-7 col-md-7 d-xs-none">
+                        <!-- Start Main Menu Search -->
+                        <div class="main-menu-search" style="display:none ;">
+                            <!-- navbar search start -->
+                            <div class="navbar-search search-style-5">
+                                <div class="search-select">
+                                    <div class="select-position">
+                                        <select id="select1">
+                                            <option selected>All</option>
+                                            <option value="1">option 01</option>
+                                            <option value="2">option 02</option>
+                                            <option value="3">option 03</option>
+                                            <option value="4">option 04</option>
+                                            <option value="5">option 05</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="search-input">
+                                    <input type="text" placeholder="Search">
+                                </div>
+                                <div class="search-btn">
+                                    <button><i class="lni lni-search-alt"></i></button>
+                                </div>
+                            </div>
+                            <!-- navbar search Ends -->
+                        </div>
+                        <!-- End Main Menu Search -->
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-5">
+                        <div class="middle-right-area">
+                            <div class="nav-hotline">
+                            </div>
+                            <div class="navbar-cart">
+                                <div class="wishlist d-none">
+                                    <a href="javascript:void(0)">
+                                        <i class="lni lni-heart"></i>
+                                        <span class="total-items">-</span>
+                                    </a>
+                                </div>
+                                <div class="cart-items">
+                                    <a href="javascript:void(0)" class="main-btn">
+                                        <i class="lni lni-cart"></i>
+                                        <span class="total-items"><ff class="shopping-qty">-</ff></span>
+                                    </a>
+                                    <!-- Shopping Item -->
+                                    <div class="shopping-item">
+                                        <div class="dropdown-cart-header">
+                                            <span><ff class="shopping-qty"></ff> Items</span>
+                                            <a href="/cart">View Cart</a>
+                                        </div>
+                                        <ul class="shopping-list">
+                                            
+                                        </ul>
+                                        <div class="bottom">
+                                            <div class="total">
+                                                <span>Total</span>
+                                                <span class="total-amount">$<ff class="shopping-total-amount"></ff></span>
+                                            </div>
+                                            <div class="button">
+                                                <a href="/checkout" class="btn animate">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ End Shopping Item -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Middle -->
+        <!-- Start Header Bottom -->
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="nav-inner">
+                        <!-- End Mega Category Menu -->
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a href="/" class="active" aria-label="Toggle navigation">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                            data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">Club Teams</a>
+                                        <ul class="sub-menu collapse club_menu" id="submenu-1-2">
+                                            <li class="nav-item"><a href="about-us.html">All</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                            data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">National Teams</a>
+                                        <ul class="sub-menu collapse national_menu" id="submenu-1-3">
+                                            
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                                            data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">NBA</a>
+                                        <ul class="sub-menu collapse nba_menu" id="submenu-1-3">
+                                            <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/contact" aria-label="Toggle navigation">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Nav Social -->
+                    <div class="nav-social">
+                        <h5 class="title">Follow Us:</h5>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Nav Social -->
+                </div>
+            </div>
+        </div>
+        <!-- End Header Bottom -->
+    </header>
+    <!-- End Header Area -->
+
+    <section class="checkout-wrapper section">
+        <div class="row m-0">
+        <div class="checkout-steps-form-style-1 col-lg-6 offset-lg-1 col-md-6 offset-md-1 col-12"  style="padding:0px 25px">
+                <div class="row card p-3 capa capa_1">
+                    <div class="single-form form-default row">
+                        <h6>Shipping Address</h6>
+                        <hr style="margin: 15px 0px;">            
+                        <label>Contact name:</label>
+                        <div class="row">
+                            <div class="col-md-12 form-input form">
+                                <input type="text" id="name_form" placeholder="Complete Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>Email Address</label>
+                                <div class="form-input form">
+                                    <input type="text" id="email_form" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>Phone Number</label>
+                                <div class="form-input form">
+                                    <input type="text" id="phone_form" placeholder="Phone Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-form form-default">
+                                <label>Mailing Address</label>
+                                <div class="form-input form">
+                                    <input type="text" id="address_form" placeholder="Mailing Address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>City</label>
+                                <div class="form-input form">
+                                    <input type="text" id="city_form"  placeholder="City">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>Region/State</label>
+                                <div class="form-input form">
+                                    <input type="text" id="state_form"  placeholder="State">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>Country</label>
+                                <div class="form-input form">
+                                    <input type="text" id="country_form"  placeholder="Country">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-form form-default">
+                                <label>Post Code</label>
+                                <div class="form-input form">
+                                    <input type="text"id="postcode_form" placeholder="Post Code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 20px;padding-bottom: 20px;">
+                            <p id="form_problem"></p>
+                            <button class="btn w-100" onclick="checkData()" style="background-color: #5c5c5c;color:#FFF;">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row card p-3 capa capa_2">
+                    <div class="single-form form-default row">
+                        <a style="color:#5c5c5c;margin-bottom: 20px;cursor: pointer;" onclick="capa(1)"><i class="lni lni-arrow-left"></i> Back</a>
+                        <h6>Payment method</h6>
+                        <hr style="margin: 15px 0px;">
+                        <div class="checkout-sidebar-price-table mt-30" style="border: 0px;margin-top: 0px;padding-top: 0px;margin-bottom: 0px;padding-bottom: 0px;">
+                            <div class="sub-total-price">
+                                <div class="total-price">
+                                    <p class="value">Subtotal Price:</p>
+                                    <p class="price shopping-subtotal-cart">-</p>
+                                </div>
+                                <div class="total-price shipping">
+                                    <p class="value">Discount:</p>
+                                    <p class="price shopping-discount-cart">-</p>
+                                </div>
+                                <div class="total-price discount">
+                                    <p class="value">Shipping:</p>
+                                    <p class="price shopping-shipping-cart"-</p>
+                                </div>
+                            </div>
+    
+                            <div class="total-payable">
+                                <div class="payable-price">
+                                    <p class="value">Total Price:</p>
+                                    <p class="price shopping-total-cart">-</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-dark" style="background-color: #5c5c5c;border: 0px;width: 100%;" onclick="payment()">Pay Now</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12" style="">
+            <div class="row">
+                <div class="checkout-sidebar">
+                    <div class="checkout-sidebar-coupon">
+                        <p>Apply Coupon to get discount!</p>
+                        <form action="#">
+                            <div class="single-form form-default">
+                                <div class="form-input form">
+                                    <input type="text" id="coupon" placeholder="Coupon Code">
+                                </div>
+                                <div class="button">
+                                    <button class="btn" onclick="checkCupon($('#coupon').val())">apply</button>
+                                </div>
+                                <div class="col-12 mt-2" id="code_div"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="checkout-sidebar-price-table mt-30 capa capa_1">
+                        <h5 class="title">Pricing Table</h5>
+
+                        <div class="sub-total-price">
+                            <div class="total-price">
+                                <p class="value">Subtotal Price:</p>
+                                <p class="price shopping-subtotal-cart"></p>
+                            </div>
+                            <div class="total-price shipping">
+                                <p class="value">Discount:</p>
+                                <p class="price shopping-discount-cart">-</p>
+                            </div>
+                            <div class="total-price discount">
+                                <p class="value">Shipping:</p>
+                                <p class="price shopping-shipping-cart">-</p>
+                            </div>
+                        </div>
+
+                        <div class="total-payable">
+                            <div class="payable-price">
+                                <p class="value">Total Price:</p>
+                                <p class="price shopping-total-cart">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>   
+    </section>
+
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-12">
+                            <div class="footer-logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logos/logochinainvert.png" alt="#">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-12">
+                            <div class="footer-newsletter">
+                                <h4 class="title">
+                                    Subscribe to our Newsletter
+                                    <span>Get all the latest information, Sales and Offers.</span>
+                                </h4>
+                                <div class="newsletter-form-head">
+                                    <div class="newsletter-form">
+                                        <input name="EMAIL" placeholder="Email address here..." type="email">
+                                        <div class="button">
+                                            <button class="btn" onclick="alert('Sorry, this service has not been enabled yet.')">Subscribe<span class="dir-part"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Top -->
+        <!-- Start Footer Middle -->
+        <div class="footer-middle">
+            <div class="container">
+                <div class="bottom-inner">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-contact">
+                                <h3>Get In Touch With Us</h3>
+                                <ul>
+                                    <li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
+                                    <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
+                                </ul>
+                                <p class="mail">
+                                    <a href="mailto:support@shopgrids.com">hello<b>@jerseys4all.store</b></a>
+                                </p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Information</h3>
+                                <ul>
+                                    <li><a href="javascript:void(0)">About Us</a></li>
+                                    <li><a href="javascript:void(0)">Contact Us</a></li>
+                                    <li><a href="javascript:void(0)">Downloads</a></li>
+                                    <li><a href="javascript:void(0)">Sitemap</a></li>
+                                    <li><a href="javascript:void(0)">FAQs Page</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Shop Departments</h3>
+                                <ul>
+                                    <li><a href="javascript:void(0)">National teams</a></li>
+                                    <li><a href="javascript:void(0)">Premier Ligue</a></li>
+                                    <li><a href="javascript:void(0)">Spanish Ligue</a></li>
+                                    <li><a href="javascript:void(0)">Italian Ligue</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-12">
+                            <div class="payment-gateway">
+                                <span>We Accept:</span>
+                                <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <div class="copyright">
+                                <p>Designed and Developed by<a href="https://graygrids.com/" rel="nofollow"
+                                        target="_blank"> <b>Jerseys</b><b style="color:#60f2c2">4</b><b>All</b></a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <ul class="socila">
+                                <li>
+                                    <span>Follow Us On:</span>
+                                </li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Bottom -->
+    </footer>
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/glightbox.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/basic.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/cart.js"></script>
+
+    <script>
+        capa(1)
+        $(window).on('load',()=>{
+            if(user){
+            $("#name_form").val(user.user.name)
+            $("#email_form").val(user.user.email)
+            }
+        })
+        discount=0;
+        const codeSave=localStorage.getItem("cupon");
+        if(codeSave){
+            checkCupon(codeSave)
+        }else{
+            searchProductsCart()
+        }
+        function searchProductsCart(){
+            productCodes=cart?.map(a=>a.code) || [];
+            try {
+                ajax("/api/products/bycodes",{productCodes,img:true},(e)=>{
+                    const {products}=e.data;
+                    const {images}=e.data;
+                    totalQty=0;totalPrice=0;
+                    cart.forEach((e,i)=> {
+                        console.log(e)
+                        const qty=e.qty;
+                        const product=products.find(a=>a.code==e.code);
+                        totalQty+=parseInt(qty);totalPrice+=qty*parseFloat(product.price);
+                    });
+                    $(".shopping-subtotal-cart").html(totalPrice.toFixed(2)+" U$D");
+                    discValue=discount<1?(totalPrice*discount).toFixed(2):(discount).toFixed(2);
+                    $(".shopping-discount-cart").html((discValue>0?"-":"")+discValue+" U$D");
+                    user?shippingVal=0:shippingVal=totalQty*3.9;
+                    $(".shopping-shipping-cart").html(+shippingVal==0?"<b style='color:#4cbd97;'>FREE SHIPPING!</b><p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>Only Members</p>":shippingVal+" U$D");
+                    $(".shopping-total-cart").html((totalPrice-parseFloat(discValue)+(shippingVal)).toFixed(2)+" U$D");
+                },()=>{
+                    location.href="/"
+                })    
+            } catch (error) {
+                console.log(error)
+            }
+            
+        }
+
+        function checkData(){
+            problema=""
+            if($("#name_form").val().length<5){problema+="You must enter a valid name.<br>"}
+            if($("#email_form").val().length<5 || $("#email_form").val().indexOf('@')<0){problema+="You must enter a valid email.<br>"}
+            if($("#address_form").val().length<5){problema+="You must enter a valid stret and number.<br>"}
+            if($("#city_form").val().length<4){problema+="You must enter a valid city.<br>"}
+            if($("#state_form").val().length<2){problema+="You must enter a valid state.<br>"}
+            if($("#country_form").val().length<4){problema+="You must enter a valid country.<br>"}
+            if($("#postcode_form").val().length<4){problema+="You must enter a valid post code.<br>"}
+            $("#form_problem").html(problema)
+            if(problema!=""){return false}
+            capa(2);
+            //payment();
+        }
+
+        function payment() {
+            const env={}
+            env.userId=user.user.uid;
+            if(localStorage.getItem("cupon")){
+                env.code=localStorage.getItem("cupon");
+            }
+            env.name=$("#name_form").val();
+            env.email=$("#email_form").val();
+            env.phone=$("#phone_form").val();
+            env.address=$("#address_form").val();
+            env.city=$("#city_form").val();
+            env.state=$("#state_form").val();
+            env.country=$("#country_form").val();
+            env.postCode=$("#postcode_form").val();
+            env.products=[]
+            cart.forEach(e => {
+               env.products.push({productId:e.id,code:e.code,quantity:e.qty,size:e.size})
+            });
+            console.log(env,user)
+            ajax("/api/purchase/create",env,(e)=>{
+                console.log("purchaseId",e.data.purchase.id)
+                location.href="/pay/"+e.data.purchase.id
+                localStorage.removeItem("cart")
+            },(e)=>{
+                console.log("Error",e)
+            })
+        }
+
+        function checkCupon(code) {
+            discount=0;
+            $("#code_div").html("")
+            ajax("/api/cupon",{code},(e)=>{
+                if(e.data?.cupon?.amount){
+                discount=e.data.cupon.amount;
+                localStorage.setItem("cupon",code)
+                $("#code_div").html(`<hr>Your Code: "${code}" <button class="btn btn-dark" onclick="localStorage.removeItem('cupon');checkCupon('fsadfasdadsasdasda')" style="font-size:.8em;float:right;margin-top:-5px;background:#5c5c5c;border:0px">Delete</button>`)
+                }
+                searchProductsCart();
+            })
+            $("#coupon").val("")
+        }
+    </script>
+    <script type="text/javascript">
+        //========= Hero Slider 
+        tns({
+            container: '.hero-slider',
+            slideBy: 'page',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 0,
+            items: 1,
+            nav: false,
+            controls: true,
+            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+        });
+
+        //======== Brand Slider
+        tns({
+            container: '.brands-logo-carousel',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 15,
+            nav: false,
+            controls: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 3,
+                },
+                768: {
+                    items: 5,
+                },
+                992: {
+                    items: 6,
+                }
+            }
+        });
+
+        countries=[ 
+            {name: 'Afghanistan', code: 'AF'}, 
+            {name: 'Åland Islands', code: 'AX'}, 
+            {name: 'Albania', code: 'AL'}, 
+            {name: 'Algeria', code: 'DZ'}, 
+            {name: 'American Samoa', code: 'AS'}, 
+            {name: 'AndorrA', code: 'AD'}, 
+            {name: 'Angola', code: 'AO'}, 
+            {name: 'Anguilla', code: 'AI'}, 
+            {name: 'Antarctica', code: 'AQ'}, 
+            {name: 'Antigua and Barbuda', code: 'AG'}, 
+            {name: 'Argentina', code: 'AR'}, 
+            {name: 'Armenia', code: 'AM'}, 
+            {name: 'Aruba', code: 'AW'}, 
+            {name: 'Australia', code: 'AU'}, 
+            {name: 'Austria', code: 'AT'}, 
+            {name: 'Azerbaijan', code: 'AZ'}, 
+            {name: 'Bahamas', code: 'BS'}, 
+            {name: 'Bahrain', code: 'BH'}, 
+            {name: 'Bangladesh', code: 'BD'}, 
+            {name: 'Barbados', code: 'BB'}, 
+            {name: 'Belarus', code: 'BY'}, 
+            {name: 'Belgium', code: 'BE'}, 
+            {name: 'Belize', code: 'BZ'}, 
+            {name: 'Benin', code: 'BJ'}, 
+            {name: 'Bermuda', code: 'BM'}, 
+            {name: 'Bhutan', code: 'BT'}, 
+            {name: 'Bolivia', code: 'BO'}, 
+            {name: 'Bosnia and Herzegovina', code: 'BA'}, 
+            {name: 'Botswana', code: 'BW'}, 
+            {name: 'Bouvet Island', code: 'BV'}, 
+            {name: 'Brazil', code: 'BR'}, 
+            {name: 'British Indian Ocean Territory', code: 'IO'}, 
+            {name: 'Brunei Darussalam', code: 'BN'}, 
+            {name: 'Bulgaria', code: 'BG'}, 
+            {name: 'Burkina Faso', code: 'BF'}, 
+            {name: 'Burundi', code: 'BI'}, 
+            {name: 'Cambodia', code: 'KH'}, 
+            {name: 'Cameroon', code: 'CM'}, 
+            {name: 'Canada', code: 'CA'}, 
+            {name: 'Cape Verde', code: 'CV'}, 
+            {name: 'Cayman Islands', code: 'KY'}, 
+            {name: 'Central African Republic', code: 'CF'}, 
+            {name: 'Chad', code: 'TD'}, 
+            {name: 'Chile', code: 'CL'}, 
+            {name: 'China', code: 'CN'}, 
+            {name: 'Christmas Island', code: 'CX'}, 
+            {name: 'Cocos (Keeling) Islands', code: 'CC'}, 
+            {name: 'Colombia', code: 'CO'}, 
+            {name: 'Comoros', code: 'KM'}, 
+            {name: 'Congo', code: 'CG'}, 
+            {name: 'Congo, The Democratic Republic of the', code: 'CD'}, 
+            {name: 'Cook Islands', code: 'CK'}, 
+            {name: 'Costa Rica', code: 'CR'}, 
+            {name: 'Cote D\'Ivoire', code: 'CI'}, 
+            {name: 'Croatia', code: 'HR'}, 
+            {name: 'Cuba', code: 'CU'}, 
+            {name: 'Cyprus', code: 'CY'}, 
+            {name: 'Czech Republic', code: 'CZ'}, 
+            {name: 'Denmark', code: 'DK'}, 
+            {name: 'Djibouti', code: 'DJ'}, 
+            {name: 'Dominica', code: 'DM'}, 
+            {name: 'Dominican Republic', code: 'DO'}, 
+            {name: 'Ecuador', code: 'EC'}, 
+            {name: 'Egypt', code: 'EG'}, 
+            {name: 'El Salvador', code: 'SV'}, 
+            {name: 'Equatorial Guinea', code: 'GQ'}, 
+            {name: 'Eritrea', code: 'ER'}, 
+            {name: 'Estonia', code: 'EE'}, 
+            {name: 'Ethiopia', code: 'ET'}, 
+            {name: 'Falkland Islands (Malvinas)', code: 'FK'}, 
+            {name: 'Faroe Islands', code: 'FO'}, 
+            {name: 'Fiji', code: 'FJ'}, 
+            {name: 'Finland', code: 'FI'}, 
+            {name: 'France', code: 'FR'}, 
+            {name: 'French Guiana', code: 'GF'}, 
+            {name: 'French Polynesia', code: 'PF'}, 
+            {name: 'French Southern Territories', code: 'TF'}, 
+            {name: 'Gabon', code: 'GA'}, 
+            {name: 'Gambia', code: 'GM'}, 
+            {name: 'Georgia', code: 'GE'}, 
+            {name: 'Germany', code: 'DE'}, 
+            {name: 'Ghana', code: 'GH'}, 
+            {name: 'Gibraltar', code: 'GI'}, 
+            {name: 'Greece', code: 'GR'}, 
+            {name: 'Greenland', code: 'GL'}, 
+            {name: 'Grenada', code: 'GD'}, 
+            {name: 'Guadeloupe', code: 'GP'}, 
+            {name: 'Guam', code: 'GU'}, 
+            {name: 'Guatemala', code: 'GT'}, 
+            {name: 'Guernsey', code: 'GG'}, 
+            {name: 'Guinea', code: 'GN'}, 
+            {name: 'Guinea-Bissau', code: 'GW'}, 
+            {name: 'Guyana', code: 'GY'}, 
+            {name: 'Haiti', code: 'HT'}, 
+            {name: 'Heard Island and Mcdonald Islands', code: 'HM'}, 
+            {name: 'Holy See (Vatican City State)', code: 'VA'}, 
+            {name: 'Honduras', code: 'HN'}, 
+            {name: 'Hong Kong', code: 'HK'}, 
+            {name: 'Hungary', code: 'HU'}, 
+            {name: 'Iceland', code: 'IS'}, 
+            {name: 'India', code: 'IN'}, 
+            {name: 'Indonesia', code: 'ID'}, 
+            {name: 'Iran, Islamic Republic Of', code: 'IR'}, 
+            {name: 'Iraq', code: 'IQ'}, 
+            {name: 'Ireland', code: 'IE'}, 
+            {name: 'Isle of Man', code: 'IM'}, 
+            {name: 'Israel', code: 'IL'}, 
+            {name: 'Italy', code: 'IT'}, 
+            {name: 'Jamaica', code: 'JM'}, 
+            {name: 'Japan', code: 'JP'}, 
+            {name: 'Jersey', code: 'JE'}, 
+            {name: 'Jordan', code: 'JO'}, 
+            {name: 'Kazakhstan', code: 'KZ'}, 
+            {name: 'Kenya', code: 'KE'}, 
+            {name: 'Kiribati', code: 'KI'}, 
+            {name: 'Korea, Democratic People\'S Republic of', code: 'KP'}, 
+            {name: 'Korea, Republic of', code: 'KR'}, 
+            {name: 'Kuwait', code: 'KW'}, 
+            {name: 'Kyrgyzstan', code: 'KG'}, 
+            {name: 'Lao People\'S Democratic Republic', code: 'LA'}, 
+            {name: 'Latvia', code: 'LV'}, 
+            {name: 'Lebanon', code: 'LB'}, 
+            {name: 'Lesotho', code: 'LS'}, 
+            {name: 'Liberia', code: 'LR'}, 
+            {name: 'Libyan Arab Jamahiriya', code: 'LY'}, 
+            {name: 'Liechtenstein', code: 'LI'}, 
+            {name: 'Lithuania', code: 'LT'}, 
+            {name: 'Luxembourg', code: 'LU'}, 
+            {name: 'Macao', code: 'MO'}, 
+            {name: 'Macedonia, The Former Yugoslav Republic of', code: 'MK'}, 
+            {name: 'Madagascar', code: 'MG'}, 
+            {name: 'Malawi', code: 'MW'}, 
+            {name: 'Malaysia', code: 'MY'}, 
+            {name: 'Maldives', code: 'MV'}, 
+            {name: 'Mali', code: 'ML'}, 
+            {name: 'Malta', code: 'MT'}, 
+            {name: 'Marshall Islands', code: 'MH'}, 
+            {name: 'Martinique', code: 'MQ'}, 
+            {name: 'Mauritania', code: 'MR'}, 
+            {name: 'Mauritius', code: 'MU'}, 
+            {name: 'Mayotte', code: 'YT'}, 
+            {name: 'Mexico', code: 'MX'}, 
+            {name: 'Micronesia, Federated States of', code: 'FM'}, 
+            {name: 'Moldova, Republic of', code: 'MD'}, 
+            {name: 'Monaco', code: 'MC'}, 
+            {name: 'Mongolia', code: 'MN'}, 
+            {name: 'Montserrat', code: 'MS'}, 
+            {name: 'Morocco', code: 'MA'}, 
+            {name: 'Mozambique', code: 'MZ'}, 
+            {name: 'Myanmar', code: 'MM'}, 
+            {name: 'Namibia', code: 'NA'}, 
+            {name: 'Nauru', code: 'NR'}, 
+            {name: 'Nepal', code: 'NP'}, 
+            {name: 'Netherlands', code: 'NL'}, 
+            {name: 'Netherlands Antilles', code: 'AN'}, 
+            {name: 'New Caledonia', code: 'NC'}, 
+            {name: 'New Zealand', code: 'NZ'}, 
+            {name: 'Nicaragua', code: 'NI'}, 
+            {name: 'Niger', code: 'NE'}, 
+            {name: 'Nigeria', code: 'NG'}, 
+            {name: 'Niue', code: 'NU'}, 
+            {name: 'Norfolk Island', code: 'NF'}, 
+            {name: 'Northern Mariana Islands', code: 'MP'}, 
+            {name: 'Norway', code: 'NO'}, 
+            {name: 'Oman', code: 'OM'}, 
+            {name: 'Pakistan', code: 'PK'}, 
+            {name: 'Palau', code: 'PW'}, 
+            {name: 'Palestinian Territory, Occupied', code: 'PS'}, 
+            {name: 'Panama', code: 'PA'}, 
+            {name: 'Papua New Guinea', code: 'PG'}, 
+            {name: 'Paraguay', code: 'PY'}, 
+            {name: 'Peru', code: 'PE'}, 
+            {name: 'Philippines', code: 'PH'}, 
+            {name: 'Pitcairn', code: 'PN'}, 
+            {name: 'Poland', code: 'PL'}, 
+            {name: 'Portugal', code: 'PT'}, 
+            {name: 'Puerto Rico', code: 'PR'}, 
+            {name: 'Qatar', code: 'QA'}, 
+            {name: 'Reunion', code: 'RE'}, 
+            {name: 'Romania', code: 'RO'}, 
+            {name: 'Russian Federation', code: 'RU'}, 
+            {name: 'RWANDA', code: 'RW'}, 
+            {name: 'Saint Helena', code: 'SH'}, 
+            {name: 'Saint Kitts and Nevis', code: 'KN'}, 
+            {name: 'Saint Lucia', code: 'LC'}, 
+            {name: 'Saint Pierre and Miquelon', code: 'PM'}, 
+            {name: 'Saint Vincent and the Grenadines', code: 'VC'}, 
+            {name: 'Samoa', code: 'WS'}, 
+            {name: 'San Marino', code: 'SM'}, 
+            {name: 'Sao Tome and Principe', code: 'ST'}, 
+            {name: 'Saudi Arabia', code: 'SA'}, 
+            {name: 'Senegal', code: 'SN'}, 
+            {name: 'Serbia and Montenegro', code: 'CS'}, 
+            {name: 'Seychelles', code: 'SC'}, 
+            {name: 'Sierra Leone', code: 'SL'}, 
+            {name: 'Singapore', code: 'SG'}, 
+            {name: 'Slovakia', code: 'SK'}, 
+            {name: 'Slovenia', code: 'SI'}, 
+            {name: 'Solomon Islands', code: 'SB'}, 
+            {name: 'Somalia', code: 'SO'}, 
+            {name: 'South Africa', code: 'ZA'}, 
+            {name: 'South Georgia and the South Sandwich Islands', code: 'GS'}, 
+            {name: 'Spain', code: 'ES'}, 
+            {name: 'Sri Lanka', code: 'LK'}, 
+            {name: 'Sudan', code: 'SD'}, 
+            {name: 'Suriname', code: 'SR'}, 
+            {name: 'Svalbard and Jan Mayen', code: 'SJ'}, 
+            {name: 'Swaziland', code: 'SZ'}, 
+            {name: 'Sweden', code: 'SE'}, 
+            {name: 'Switzerland', code: 'CH'}, 
+            {name: 'Syrian Arab Republic', code: 'SY'}, 
+            {name: 'Taiwan, Province of China', code: 'TW'}, 
+            {name: 'Tajikistan', code: 'TJ'}, 
+            {name: 'Tanzania, United Republic of', code: 'TZ'}, 
+            {name: 'Thailand', code: 'TH'}, 
+            {name: 'Timor-Leste', code: 'TL'}, 
+            {name: 'Togo', code: 'TG'}, 
+            {name: 'Tokelau', code: 'TK'}, 
+            {name: 'Tonga', code: 'TO'}, 
+            {name: 'Trinidad and Tobago', code: 'TT'}, 
+            {name: 'Tunisia', code: 'TN'}, 
+            {name: 'Turkey', code: 'TR'}, 
+            {name: 'Turkmenistan', code: 'TM'}, 
+            {name: 'Turks and Caicos Islands', code: 'TC'}, 
+            {name: 'Tuvalu', code: 'TV'}, 
+            {name: 'Uganda', code: 'UG'}, 
+            {name: 'Ukraine', code: 'UA'}, 
+            {name: 'United Arab Emirates', code: 'AE'}, 
+            {name: 'United Kingdom', code: 'GB'}, 
+            {name: 'United States', code: 'US'}, 
+            {name: 'United States Minor Outlying Islands', code: 'UM'}, 
+            {name: 'Uruguay', code: 'UY'}, 
+            {name: 'Uzbekistan', code: 'UZ'}, 
+            {name: 'Vanuatu', code: 'VU'}, 
+            {name: 'Venezuela', code: 'VE'}, 
+            {name: 'Viet Nam', code: 'VN'}, 
+            {name: 'Virgin Islands, British', code: 'VG'}, 
+            {name: 'Virgin Islands, U.S.', code: 'VI'}, 
+            {name: 'Wallis and Futuna', code: 'WF'}, 
+            {name: 'Western Sahara', code: 'EH'}, 
+            {name: 'Yemen', code: 'YE'}, 
+            {name: 'Zambia', code: 'ZM'}, 
+            {name: 'Zimbabwe', code: 'ZW'} 
+            ]
+    </script>
+</body>
+
+</html>

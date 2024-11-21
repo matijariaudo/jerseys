@@ -1,0 +1,9 @@
+# Ignorar node_modules en cualquier directorio
+node_modules/
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar archivos dentro imagenes de productos
+/public/assets/images/products/*
+!/public/assets/images/products/.gitkeep
