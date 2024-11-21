@@ -31,10 +31,10 @@ ajax('/api/categories',{},(e)=>{
     qty=0;
     teams.filter(a=>a.link=='National Teams').forEach((e,i) => {
 
-        $(".national_menu").append(`<li class="nav-item" style="border:1px solid #e8e8e8;border-width:1px 0px 0px 0px;padding-top:10px"><a href="/products/soccer/nationalteams/${e.team.replaceAll(" ","")}"><img src="assets/images/logos/teams/${e.team.replaceAll(" ","")}.png" alt="" style="height: 25px;"> ${e.team}</a></li>`)
+        $(".national_menu").append(`<li class="nav-item" style="border:1px solid #e8e8e8;border-width:1px 0px 0px 0px;padding-top:10px"><a href="/products/soccer/nationalteams/${e.team.toLowerCase().replaceAll(" ","")}"><img src="assets/images/logos/teams/${e.team.toLowerCase().replaceAll(" ","")}.png" alt="" style="height: 25px;"> ${e.team}</a></li>`)
         $("#menu_mobile_nation").append(`
             <div onclick="location.href='/products/soccer/nationalteams/${e.team.replaceAll(" ","")}'" style="cursor:pointer;width: 110px;height: 90px;float: left;margin-right: 10px;border-radius: 10px;border: 1px solid #f6f6f6;text-align: center;padding-top: 10px;">
-                <img src="assets/images/logos/teams/${e.team.replaceAll(" ","")}.png" alt="" style="height: 40px;">
+                <img src="assets/images/logos/teams/${e.team.toLowerCase().replaceAll(" ","")}.png" alt="" style="height: 40px;">
                 <p>${e.team}</p>
             </div>
             `);
@@ -44,11 +44,11 @@ ajax('/api/categories',{},(e)=>{
     html_menu_final="";html_mobile_final="";
     categories.filter(a=>a!=='National Teams').forEach((e,i) => {
         html_mobile=`
-            <div onclick="location.href='/products/soccer/${e.replaceAll(" ","")}'" style="cursor:pointer;width: 110px;height: 90px;float: left;margin-right: 10px;border-radius: 10px;border: 1px solid #f6f6f6;text-align: center;padding-top: 10px;">
-                <img src="assets/images/logos/teams/${e.replaceAll(" ","")}.png" alt="" style="height: 40px;">
+            <div onclick="location.href='/products/soccer/${e.toLowerCase().replaceAll(" ","")}'" style="cursor:pointer;width: 110px;height: 90px;float: left;margin-right: 10px;border-radius: 10px;border: 1px solid #f6f6f6;text-align: center;padding-top: 10px;">
+                <img src="assets/images/logos/teams/${e.toLowerCase().replaceAll(" ","")}.png" alt="" style="height: 40px;">
                 <p>${e}</p>
             </div>`
-        html_menu=`<li class="nav-item" style="border:1px solid #e8e8e8;border-width:0px 0px 1px 0px;padding-bottom:10px"><a href="/products/soccer/${e.replaceAll(" ","")}"><img src="assets/images/logos/teams/${e.replaceAll(" ","")}.png" alt="" style="height: 25px;"> ${e}</a></li>`
+        html_menu=`<li class="nav-item" style="border:1px solid #e8e8e8;border-width:0px 0px 1px 0px;padding-bottom:10px"><a href="/products/soccer/${e.toLowerCase().replaceAll(" ","")}"><img src="assets/images/logos/teams/${e.toLowerCase().replaceAll(" ","")}.png" alt="" style="height: 25px;"> ${e}</a></li>`
         console.log(e)
         if(e.toLowerCase()=="national teams" || e.toLowerCase()=="other teams"){
             html_menu_final+=html_menu;
