@@ -50,13 +50,13 @@ return html
 
 
 const sendEmail=async({email,subject,typeNro,button})=>{
-
+console.log(process.env.EMAIL_ACCOUNT,process.env.EMAIL_CLAVE)
 let mailTransporter =
 	nodemailer.createTransport(
 		{
             host: 'smtppro.zoho.com.au',
             port: 465,
-            secure: true, // true for 465, false for other ports
+            secure: false, // true for 465, false for other ports
 			auth: {
 				user: process.env.EMAIL_ACCOUNT,
 				pass: process.env.EMAIL_CLAVE

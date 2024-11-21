@@ -9,6 +9,7 @@ const PurchaseRouter = require('./js/routers/purchaseRouters');
 const axios = require('axios');
 const { Purchase } = require('./js/models');
 const { createProducts } = require('./add');
+const { sendEmail } = require('./js/helpers/sendEmail');
 
 require('dotenv').config();
 
@@ -152,6 +153,7 @@ app.listen(PORT, async() => {
   console.log("Conectando BD")
   await dbConnection();
   //await createProducts();
+  sendEmail({email:"matiariaudo@gmail.com",subject:"Hello",typeNro:1});
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 

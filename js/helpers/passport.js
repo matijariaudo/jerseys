@@ -12,6 +12,7 @@ const ISPRODUCTION=process.env.ISPRODUCTION;
 const GOOGLE_CALLBACK=process.env.GOOGLE_CALLBACK;
 const GOOGLE_CALLBACK_LOCAL=process.env.GOOGLE_CALLBACK_LOCAL;
 const CALLBACKGOOGLE=ISPRODUCTION?GOOGLE_CALLBACK:GOOGLE_CALLBACK_LOCAL;
+
 const FACE_ID=process.env.FACE_ID||"";
 const FACE_SECRET=process.env.FACE_SECRET||"";
 const GoogleStrategy = passportGoogle.Strategy;

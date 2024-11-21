@@ -3288,8 +3288,13 @@ top: 2px;
   background: #fff;
 }
 
+
 .single-product .product-image {
-  overflow: hidden;
+  width: 100%; /* Tamaño fijo deseado */
+  height: 220px; /* Tamaño fijo deseado */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
   position: relative;
 }
 
@@ -3345,9 +3350,10 @@ top: 2px;
 }
 
 .single-product .product-image img {
-  width: 100%;
-  display: block;
-  margin: 0 auto; /* Esto centrará la imagen horizontalmente */
+  width: 100%; /* La imagen ocupa el 100% del contenedor en ancho */
+  height: 100%; /* La imagen ocupa el 100% del contenedor en alto */
+  object-fit: cover; /* Hace que la imagen cubra completamente el contenedor y se recorte si es necesario */
+  object-position: center; /* Centra la imagen dentro del contenedor */
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
@@ -3457,6 +3463,9 @@ top: 2px;
 @media (max-width: 767px) {
   .single-banner.custom-responsive-margin {
     margin-top: 30px;
+  }
+  .single-product .product-image {
+    height: 350px; /* Tamaño fijo deseado */
   }
 }
 

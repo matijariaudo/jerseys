@@ -121,6 +121,7 @@ const sendMailValidation=async(req,res)=>{
     return res.status(200).json(await jsonAnswer(200,null,`We have sent an email to validate your direction`,{user,token}));
 }
 
+
 const sendMailPassword=async(req,res)=>{
     const {email}=req.body;
     const user=await User.findOne({email:email,estado:true});
