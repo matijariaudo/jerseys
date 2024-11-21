@@ -56,7 +56,7 @@ let mailTransporter =
 		{
             host: 'smtppro.zoho.com.au',
             port: 465,
-            secure: false, // true for 465, false for other ports
+            secure: true, // true for 465, false for other ports
 			auth: {
 				user: process.env.EMAIL_ACCOUNT,
 				pass: process.env.EMAIL_CLAVE
