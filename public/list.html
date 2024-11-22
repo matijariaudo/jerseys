@@ -574,12 +574,12 @@
         }
 
         function print_product(s){
-            console.log(`assets/images/product/${convertImgUrl(s.mainImg)}`)
+            const mainImg=s.mainImg;
             return `<div class="col-lg-3 col-md-6 col-12" style="padding:5px">
                     <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="product-image">
-                            <img src="assets/images/products/${convertImgUrl(s.mainImg)}" alt="#" onError="errorImg($(this),'${s.mainImg}')" style="border-radius:5px">
+                            <img src="assets/images/products/${convertImgUrl(mainImg)}" alt="#" onError="errorImg($(this),'${mainImg}')" style="border-radius:5px">
                             <div class="button">
                                 <a href="/product/${s.code}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                             </div>

@@ -14,10 +14,11 @@ const getProducts = async (req, res) => {
 
         const filter = {};
         if (status !== undefined) filter.status = status === 'true';
-        const buildRegex = (input) => new RegExp(`^${input.split(' ').join('')}|${input}`, 'i');
-        if (sport) filter.sport = { $regex: buildRegex(sport) };
-        if (category) filter.categoryFilter = { $regex: buildRegex(category) };
-        if (team) filter.teamFilter = { $regex: buildRegex(team) };
+
+        // Simplificación del regex para hacerlo insensible a mayúsculas/minúsculas
+        if (sport) filter.sport = { $regex: sport, $options: 'i' };
+        if (category) filter.categoryFilter = { $regex: category, $options: 'i' };
+        if (team) filter.teamFilter = { $regex: team, $options: 'i' };
 
         const totalRecords = await Product.countDocuments(filter);
 
@@ -27,9 +28,9 @@ const getProducts = async (req, res) => {
             .skip(start)
             .limit(limit);
         
-        products.forEach(e=>{
-            console.log(e.year,e.product)
-        })
+        products.forEach(e => {
+            console.log(e.year, e.product);
+        });
 
         return res.status(200).json(await jsonAnswer(200, null, 'Successful Operation', {
             totalRecords,
@@ -44,10 +45,15 @@ const getProducts = async (req, res) => {
     }
 };
 
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 const getCategories = async (req, res) => {
     try {
         // Obtener todos los productos para procesarlos
-        const products = await Product.find({}, 'sport category team');
+        const products = await Product.find({status:true}, 'sport category team');
 
         // Crear un objeto para almacenar la estructura solicitada
         const result = {
@@ -58,7 +64,10 @@ const getCategories = async (req, res) => {
 
         // Recorrer cada producto y organizar los datos en la estructura deseada
         products.forEach(product => {
-            const { sport, category, team } = product;
+            const { sport:sport1, category:category1, team:team1 } = product;
+            const sport=capitalizeFirstLetter(sport1.toLowerCase());
+            const category=capitalizeFirstLetter(category1.toLowerCase());
+            const team=capitalizeFirstLetter(team1.toLowerCase());
 
             // Añadir el deporte si no está en la lista
             if (!result.sports.includes(sport)) {

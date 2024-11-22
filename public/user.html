@@ -270,8 +270,8 @@
                             <img src="https://media.tenor.com/WsmiS-hUZkEAAAAj/verify.gif" alt="" style="float: left;width: 40px;margin-right: 10px;">
                             <h3 style="margin-top: 5px;"> Your email was validated successfully!</h3>
                             <center>
-                                <button class="btn btn-dark" style="width: 80%;margin-top: 30px;">Continue shopping</button>
-                                <button class="btn btn-dark" style="width: 80%;margin-top: 10px;">Go to your cart</button>
+                                <a class="btn btn-dark" style="width: 80%;margin-top: 30px;" href="/products/soccer">Continue shopping</a>
+                                <a class="btn btn-dark" style="width: 80%;margin-top: 10px;" href="/user">Go to your account</a>
                             </center>
                         </div>
                     </div>
@@ -623,16 +623,19 @@
         })
 
         function initUser(){
-        if(user.token){
-            console.log("AAAAAA",user,"BBBBBB")
-            capa(10);
-            purchases();
-            return true;
-        }
         if(getParameterByName("tokenEmail")){
             capa(4);
             return true;
         }
+        
+        if(user){
+            if(user.token){
+            capa(10);
+            purchases();
+            return true;
+            }
+        }
+        
         if(getCookie("action")=="register"){
             capa(2);
             return true;

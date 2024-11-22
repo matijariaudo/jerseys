@@ -6,21 +6,21 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-    function ajax(url,json_dat,callback,error=function(e) {console.log("ERRROR",e)}){
-            let token="Bearer"
-            if(json_dat?.token){
-                token=`Bearer ${json_dat.token}`
-            }
-            console.log(url,`Bearer ${json_dat.token}`)
-            //console.log("token",token)
-            $.ajax({url,type:"POST",headers: {"Content-Type": "application/json","Authorization": token},dataType : 'json',data: JSON.stringify(json_dat),success: function(data, textStatus, jqXHR){console.log(data),callback(data)},error: function( jqXHR, textStatus, errorThrown ) {console.log("!!!!!!!!!"),error(jqXHR.responseJSON);}});
-    }
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
+}
+function ajax(url,json_dat,callback,error=function(e) {console.log("ERRROR",e)}){
+        let token="Bearer"
+        if(json_dat?.token){
+            token=`Bearer ${json_dat.token}`
+        }
+        console.log(url,`Bearer ${json_dat.token}`)
+        //console.log("token",token)
+        $.ajax({url,type:"POST",headers: {"Content-Type": "application/json","Authorization": token},dataType : 'json',data: JSON.stringify(json_dat),success: function(data, textStatus, jqXHR){console.log(data),callback(data)},error: function( jqXHR, textStatus, errorThrown ) {console.log("!!!!!!!!!"),error(jqXHR.responseJSON);}});
+}
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
     function capa(i) {
         $(".capa").hide();
@@ -33,13 +33,13 @@ function getParameterByName(name, url) {
     }
     
     $(window).on('load',()=>{
-        
-    
+        //alert()
         const token=getParameterByName("token")
-        console.log("TOKEN",token)
+        const tokenEmail=getParameterByName("tokenEmail")
         if(token){
+            tokenEmail?add=`?tokenEmail=OK`:add=""
             var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-            window.history.replaceState({ path: newUrl }, '', newUrl);
+            window.history.replaceState({ path: newUrl }, '', newUrl+add);
             checktoken(token)
         }else{
             user=JSON.parse(localStorage.getItem("user")|| "{}")

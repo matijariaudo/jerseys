@@ -29,7 +29,7 @@ ajax('/api/categories',{},(e)=>{
     teams=teams.sort().map(a=>{return {team:a,link:teamsObj[a]};})
     $(".national_menu").html(`<li class="nav-item"><a href="/products/soccer/nationalteams"><img src="assets/images/logos/teams/otherteams.png" alt="" style="height: 25px;"> See all nations</a></li>`)
     qty=0;
-    teams.filter(a=>a.link=='National Teams').forEach((e,i) => {
+    teams.filter(a=>a.link=='National teams').forEach((e,i) => {
 
         $(".national_menu").append(`<li class="nav-item" style="border:1px solid #e8e8e8;border-width:1px 0px 0px 0px;padding-top:10px"><a href="/products/soccer/nationalteams/${e.team.toLowerCase().replaceAll(" ","")}"><img src="assets/images/logos/teams/${e.team.toLowerCase().replaceAll(" ","")}.png" alt="" style="height: 25px;"> ${e.team}</a></li>`)
         $("#menu_mobile_nation").append(`

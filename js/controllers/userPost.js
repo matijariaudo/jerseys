@@ -22,8 +22,8 @@ const userCreate=async(req,res)=>{
         console.log(1)
         const tokenE=jwt.sign({ uid: newuser.id,email:newuser.email}, process.env.SEED,{expiresIn:'12h'})
         await newuser.save()
-        console.log(`http://${req.headers.host}/login/users/validar/${tokenE}`)
-        sendEmail({email:newuser.email,subject:"Your account was created. Verify your email",typeNro:2,button:{frase:"Verify email and get started",link:`http://${req.headers.host}/login/users/validar/${tokenE}`}})
+        console.log(`http://${req.headers.host}/api/users/validar/${tokenE}`)
+        sendEmail({email:newuser.email,subject:"Your account was created. Verify your email",typeNro:2,button:{frase:"Verify email and get started",link:`http://${req.headers.host}/api/users/validar/${tokenE}`}})
         return res.status(200).json(await jsonAnswer(200,null,`The user has been created`,{user:newuser,link:`http://${req.headers.host}/login/users/validar/${tokenE}`}));
     } catch (error) {
         console.log(error)
@@ -148,7 +148,8 @@ const loginJWTCheckemail=async(req,res)=>{
         checkUser.email_valid=true;
         checkUser.save()
         const token=jwt.sign({ uid: user.id }, process.env.SEED,{expiresIn:'12h'})
-        return res.redirect(`http://${req.headers.host}/register?tokenEmail=OK&token=${token}`); 
+        console.log(`http://${req.headers.host}/user?tokenEmail=OK&token=${token}`)
+        return res.redirect(`http://${req.headers.host}/user?tokenEmail=OK&token=${token}`); 
     }
     return res.redirect(`http://${req.headers.host}?error=TOKEN`);   
 }
