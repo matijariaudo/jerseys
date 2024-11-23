@@ -74,7 +74,7 @@ const loginTokensPassport=async(req, res) => {
         user=await new User({name,email,clave:"-",rol:"USER_ROLE",google:true,email_valid:true});
         console.log(user)
         console.log("ENVIAR CORREO A : ",email)
-        sendEmail({email,subject:"Welcome to WSPPlus :)",typeNro:1})
+        sendEmail({email,subject:"Welcome to xJersey",typeNro:1});
         await user.save();
     }
     const token=jwt.sign({ uid: user.id }, process.env.SEED,{expiresIn:'12h'})

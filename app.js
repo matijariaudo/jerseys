@@ -16,6 +16,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT; 
+const urlPayment=process.env.ISPRODUCTION?`api-m.paypal.com`:`www.sandbox.paypal.com`
 
 // Middleware para parsear application/json
 app.use(express.json());
@@ -23,7 +24,7 @@ app.use(express.json());
 async function getAccessToken() {
   console.log(`${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_SECRET}`)
   const auth = Buffer.from(`${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_SECRET}`).toString('base64');
-  const response = await axios.post('https://api-m.sandbox.paypal.com/v1/oauth2/token', 'grant_type=client_credentials', {
+  const response = await axios.post('https://api-m.paypal.com/v1/oauth2/token', 'grant_type=client_credentials', {
       headers: {
           'Authorization': `Basic ${auth}`,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -53,9 +54,8 @@ app.get('/pay/:id', async (req, res) => {
   purchase.status='pending';
   purchase.save()
   const accessToken = await getAccessToken();
-
   // Crear una orden
-  const order = await axios.post('https://api-m.sandbox.paypal.com/v2/checkout/orders', {
+  const order = await axios.post(`https://${urlPayment}/v1/oauth2/tokenhttps://api-m.sandbox.paypal.com/v2/checkout/orders`, {
       intent: 'CAPTURE',
       purchase_units: [{
           amount: {
@@ -79,7 +79,7 @@ app.get('/pay/:id', async (req, res) => {
   // Redirige a PayPal para completar el pago
   const approvalUrl = order.data.links.find(link => link.rel === 'approve').href;
   const token=approvalUrl.split("token=")[1];
-  const url=`https://www.sandbox.paypal.com/checkoutweb/signup?token=${token}`
+  const url=`https://${urlPayment}/checkoutweb/signup?token=${token}`
   res.redirect(url);
 });
 
@@ -92,7 +92,7 @@ app.get('/success/:idPurchase', async (req, res) => {
   const accessToken = await getAccessToken();
 
   // Captura el pago - Convierto el pendiente a cobro en la tarjeta del usuario
-  const capture = await axios.post(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${token}/capture`, {}, {
+  const capture = await axios.post(`https://${urlPayment}/v2/checkout/orders/${token}/capture`, {}, {
       headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
