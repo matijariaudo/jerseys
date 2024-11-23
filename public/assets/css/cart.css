@@ -39,8 +39,8 @@
   
   @media (max-width: 767px) {
     .cart-single-list a img {
-      width: 50%;
-      margin-bottom: 10px;
+      width: 100%;
+      margin-bottom: 0px;
     }
   }
   

@@ -295,6 +295,7 @@
                                             <div class="button">
                                                 <button class="btn" onclick="checkCupon($('#coupon').val())">Apply Coupon</button>
                                             </div>
+                                            <div class="col-12 mt-2" id="code_div"></div>
                                     </div>
                                 </div>
                             </div>
@@ -368,7 +369,7 @@
                                     <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                                 </ul>
                                 <p class="mail">
-                                    <a href="mailto:support@shopgrids.com">hello<b>@jerseys4all.store</b></a>
+                                    <a href="mailto:xjerseyweb@gmail.com">xjerseyweb<b>@gmail.com</b></a>
                                 </p>
                             </div>
                             <!-- End Single Widget -->
@@ -478,20 +479,20 @@
                         $("#cart-items").append(`
                             <div class="cart-single-list">
                                 <div class="row align-items-center">
-                                    <div class="col-lg-1 col-md-1 col-12">
-                                        <a href="product-details.html"><img src="https://margen.site/jerseys/test.php?img=${product.mainImg}" alt="#"></a>
+                                    <div class="col-lg-1 col-md-1 col-12"">
+                                        <a href="/product/${product.code}"><img src="https://margen.site/jerseys/test.php?img=${product.mainImg}" alt="#"></a>
                                     </div>
                                     <div class="col-lg-4 col-md-3 col-12">
-                                        <h5 class="product-name"><a href="product-details.html">
+                                        <h5 class="product-name"><a href="/product/${product.code}">
                                                 ${product.product}</a></h5>
                                         <p class="product-des">
                                             <span><em>Size:</em> ${e.size}</span>
                                         </p>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <ff class="d-inline d-lg-none">Unit price: </ff>${product.price}
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
+                                    <div class="col-lg-2 col-md-2 col-12 d-none">
                                         <div class="count-input">
                                             <select class="form-control">
                                                 <option>${e.qty}</option>
@@ -516,7 +517,7 @@
                             </div>`);
                     });
                     $(".shopping-total-cart").html(totalPrice.toFixed(2));
-                    discValue=discount<1?(totalPrice*discount).toFixed(2):(totalPrice-discount).toFixed(2);
+                    discValue=discount<1?(totalPrice*discount).toFixed(2):(discount).toFixed(2);
                     $(".shopping-discount-cart").html(discValue);
                     $(".shopping-subtotal-cart").html((totalPrice-parseFloat(discValue)).toFixed(2));
                 },()=>{
@@ -533,6 +534,7 @@
                 if(e.data?.cupon?.amount){
                 discount=e.data.cupon.amount;
                 localStorage.setItem("cupon",code)
+                $("#code_div").html(`<hr>Your Code: "${code}" <button class="btn" onclick="localStorage.removeItem('cupon');checkCupon('fsadfasdadsasdasda')" style="font-size:.9em;padding-top:15px;margin-top:-5px;background:#FFF;border:0px">Delete </button>`)
                 }
                 searchProductsCart();
             })

@@ -153,6 +153,7 @@ app.listen(PORT, async() => {
   console.log("Conectando BD")
   await dbConnection();
   //await createProducts();
+  //sendEmail({email:"matiariaudo@gmail.com",subject:"Hello",typeNro:1,button:{frase:'Validate your email',link:'https://google.com'}});
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 

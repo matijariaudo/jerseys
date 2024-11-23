@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
     <link rel="stylesheet" href="assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css?id=1" />
     <link rel="stylesheet" href="assets/css/list.css" />
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -280,7 +280,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-8 offset-lg-2">
-                            <img src="assets/images/banner/freeship.png" alt="" style="width: 100%;border-radius: 10px;margin:30px 0px 10px 0px">
+                            <img src="assets/images/banner/freeshippingbanner.png" alt="" style="width: 100%;border-radius: 10px;margin:30px 0px 10px 0px">
                         </div>
                         
                         <p class="mt-10 category_title"></p>
@@ -364,7 +364,7 @@
                                     <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                                 </ul>
                                 <p class="mail">
-                                    <a href="mailto:support@shopgrids.com">hello<b>@jerseys4all.store</b></a>
+                                    <a href="mailto:xjerseyweb@gmail.com">xjerseyweb<b>@gmail.com</b></a>
                                 </p>
                             </div>
                             <!-- End Single Widget -->
@@ -548,7 +548,8 @@
             const sport=$("#sports_form").val()!="All"?$("#sports_form").val():undefined;
             const category=$("#categories_form").val()!="All"?$("#categories_form").val():undefined;
             const team=$("#teams_form").val()!="All"?$("#teams_form").val():undefined;
-            const pag=getParameterByName("pag") || 1;
+            let pag=getParameterByName("pag") || 1;
+            if(pag<1){pag=1}
             qtyReg=20;
             ajax('/api/products',{qty:qtyReg,init:(qtyReg*(parseInt(pag)-1)),sport,team,category},(e)=>{
                 const {products,totalRecords,qty,init}=e.data;
@@ -558,8 +559,10 @@
                 pages=Math.floor(totalRecords/qty)+1;
 
                 if(pages==0){pages=1;}
-                for (let x = 1; x <= pages; x++) {
-                    if(init>=(x-1)*qty && init<x*qty){
+                pageAct=init/qty+1;
+                const {inicio,fin}=calcularRango(pages,pageAct)
+                for (let x = inicio; x <= fin; x++) {
+                    if(pageAct==x){
                         classI="active";
                         $(".pagination-prev").attr("href","?pag="+(x-1))
                         $(".pagination-post").attr("href","?pag="+(x+1))
@@ -573,15 +576,37 @@
             })
         }
 
+        function calcularRango(x, numero) {
+            if (x <= 4) {
+                return { inicio: 1, fin: x }; // Si x es menor o igual a 6, devuelve todo
+            }
+
+            let inicio = numero - 2;
+            let fin = numero + 2;
+
+            // Ajuste si inicio es menor que 1
+            if (inicio < 1) {
+                fin += (1 - inicio);
+                inicio = 1;
+            }
+
+            // Ajuste si fin es mayor que x
+            if (fin > x) {
+                inicio -= (fin - x);
+                fin = x;
+            }
+
+            return { inicio, fin };
+        }
         function print_product(s){
             const mainImg=s.mainImg;
-            return `<div class="col-lg-3 col-md-6 col-12" style="padding:5px">
+            return `<div class="col-lg-3 col-md-6 col-6" style="padding:2px">
                     <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="product-image">
                             <img src="assets/images/products/${convertImgUrl(mainImg)}" alt="#" onError="errorImg($(this),'${mainImg}')" style="border-radius:5px">
                             <div class="button">
-                                <a href="/product/${s.code}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+                                <a href="/product/${s.code}" class="btn">Select options</a>
                             </div>
                         </div>
                         <div class="product-info">
@@ -599,7 +624,7 @@
                                 <li><span>4.0 Review(s)</span></li>
                             </ul>
                             <div class="price">
-                                <span><img src="assets/images/basic/blackfriday.png" alt="" style="width: 40px;margin-right: 10px;"> AUD ${s.price}</span>
+                                <span><img src="assets/images/basic/blackfriday.png" alt="" style="width: 40px;margin-right: 10px;"> u$d ${s.price}</span>
                             </div>
                         </div>
                     </div>

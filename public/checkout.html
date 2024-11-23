@@ -454,7 +454,7 @@
                                     <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                                 </ul>
                                 <p class="mail">
-                                    <a href="mailto:support@shopgrids.com">hello<b>@jerseys4all.store</b></a>
+                                    <a href="mailto:xjerseyweb@gmail.com">xjerseyweb<b>@gmail.com</b></a>
                                 </p>
                             </div>
                             <!-- End Single Widget -->
@@ -571,8 +571,8 @@
                     $(".shopping-subtotal-cart").html(totalPrice.toFixed(2)+" U$D");
                     discValue=discount<1?(totalPrice*discount).toFixed(2):(discount).toFixed(2);
                     $(".shopping-discount-cart").html((discValue>0?"-":"")+discValue+" U$D");
-                    user?shippingVal=0:shippingVal=totalQty*3.9;
-                    $(".shopping-shipping-cart").html(+shippingVal==0?"<b style='color:#4cbd97;'>FREE SHIPPING!</b><p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>Only Members</p>":shippingVal+" U$D");
+                    totalQty>1?shippingVal=0:shippingVal=5.99;
+                    $(".shopping-shipping-cart").html(+shippingVal==0?"<b style='color:#4cbd97;'>FREE SHIPPING!</b><p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>2 or more products</p>":`<p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>Get <b>free shipping!</b> Buy 2 units</p><ff style='float:right'>U$D ${shippingVal}</ff>`);
                     $(".shopping-total-cart").html((totalPrice-parseFloat(discValue)+(shippingVal)).toFixed(2)+" U$D");
                 },()=>{
                     location.href="/"
@@ -633,7 +633,7 @@
                 if(e.data?.cupon?.amount){
                 discount=e.data.cupon.amount;
                 localStorage.setItem("cupon",code)
-                $("#code_div").html(`<hr>Your Code: "${code}" <button class="btn btn-dark" onclick="localStorage.removeItem('cupon');checkCupon('fsadfasdadsasdasda')" style="font-size:.8em;float:right;margin-top:-5px;background:#5c5c5c;border:0px">Delete</button>`)
+                $("#code_div").html(`<hr>Your Code: "${code}" <button class="btn" onclick="localStorage.removeItem('cupon');checkCupon('fsadfasdadsasdasda')" style="font-size:.9em;padding-top:15px;margin-top:-5px;background:#FFF;border:0px">Delete </button>`)
                 }
                 searchProductsCart();
             })

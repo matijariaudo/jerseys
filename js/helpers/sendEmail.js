@@ -14,25 +14,22 @@ html=`
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f5f5f5;">
         <tr>
             <td align="center">
-                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; margin: auto;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; margin:auto;width:80%;">
                     <tr>
                         <td style="padding: 40px 20px; text-align: center;">
-                            ${typeNro==1?`<img src="https://cdn-icons-png.flaticon.com/256/6381/6381582.png" alt="Email Verification" style="max-width: 70%;max-width:150px; height: auto; margin-bottom: 20px;">`:""}
-                            ${typeNro==2?`<img src="https://static.vecteezy.com/system/resources/previews/010/998/284/original/3d-password-input-illustration-design-free-png.png" alt="Email Verification" style="max-width: 70%;max-width:150px; height: auto; margin-bottom: 20px;">`:""}
-                            ${typeNro==3?`<img src="https://cdn3d.iconscout.com/3d/premium/thumb/email-verify-6161730-5073621.png" alt="Email Verification" style="max-width: 70%;max-width:150px; height: auto; margin-bottom: 20px;">`:""}
                             ${typeNro==1?`
-                            <h1 style="color: #333333;">Welcome Chatter<b style="color:#5AE4A8">+</b></h1>
+                            <h1 style="color: #333333;">Welcome to <br><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"></h1>
                             <p style="color: #666666;">Your account has been created succesfuly.</p>
                             `:""}
                             ${typeNro==2?`
-                            <h1 style="color: #333333;">Verify your email</h1>
+                            <h1 style="color: #333333;"><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"><br>Verify your email</h1>
                             <p style="color: #666666;">Please, click in the following button to validate your email.</p>
                             `:""}
                             ${typeNro==3?`
-                            <h1 style="color: #333333;">Reset your password</h1>
+                            <h1 style="color: #333333;"><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"><br>Reset your password</h1>
                             <p style="color: #666666;">You have requested to reset your password. Click the button below to proceed.</p>
                             `:""}
-                            ${button?`<a href="${button.link}" style="display: inline-block; background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">${button.frase}</a>
+                            ${button?`<a href="${button.link}" style="display: inline-block; background-color: #78FFB6; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px;">${button.frase}</a>
                             `:""}
                             ${typeNro==3?`<p style="color: #999999; margin-top: 20px;">If you didn't request a password reset, you can safely ignore this email.</p>
                             `:""}
@@ -65,9 +62,9 @@ let mailTransporter =
 	);
 
 let mailDetails = {
-	from:  `Mathias Sinclair <${process.env.EMAIL_ACCOUNT}>`,
+	from:  `Matias from xJersey <${process.env.EMAIL_ACCOUNT}>`,
 	to: email,
-	subject: `Chatter.plus: ${subject}`,
+	subject: `xJersey: ${subject}`,
 	html: creatHtml(typeNro,button)
 };
 
