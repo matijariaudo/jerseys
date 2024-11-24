@@ -338,23 +338,23 @@
     </section>
     <!-- End Item Details -->
 
-    <div class="modal" tabindex="-1" id="myModal_Buy">
+    <div class="modal fade" id="myModal_Buy" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header"  style="border: 0px;">
-              <h5 class="modal-title" >Jerseys4All</h5>
+            <div class="modal-header" style="border: 0px;">
+              <h5 class="modal-title">x-Jersey</h5>
               <button type="button" class="btn-close compra compra_2" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body compra compra_1" style="border: 0px;text-align: center;">
-                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+              <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
               <p style="margin-top: -30px;margin-bottom: 40px;">Adding in your cart.</p>
             </div>
             <div class="modal-body compra compra_2" style="border: 0px;">
-                <p>The product has been added in your cart.</p>
+              <p>The product has been added in your cart.</p>
             </div>
-            <div class="modal-footer compra compra_2"  style="border: 0px;">
-                <a href="/checkout"><button type="button" class="btn btn-secondary">Go to checkout</button></a>
-              <button type="button" class="btn btn-green" style="background-color: #60f2c2;"  data-bs-dismiss="modal">Continue Shipping</button>
+            <div class="modal-footer compra compra_2" style="border: 0px;">
+              <a href="/checkout"><button type="button" class="btn btn-dark">Go to checkout</button></a>
+              <button type="button" class="btn btn-green" data-bs-dismiss="modal">Continue Shopping</button>
             </div>
           </div>
         </div>
@@ -497,7 +497,10 @@
     
     <script>
         
-        var myModal = new bootstrap.Modal(document.getElementById('myModal_Buy'))
+        const myModal = new bootstrap.Modal(document.getElementById('myModal_Buy'), {
+        backdrop: 'static', // Evita que se cierre al hacer clic fuera
+        keyboard: false     // Evita que se cierre con la tecla Escape
+        });
         
         init()
         function init(){

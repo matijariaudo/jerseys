@@ -25,6 +25,7 @@ function getCookie(name) {
     function capa(i) {
         $(".capa").hide();
         $(".capa_"+i).show()
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
     
     function seccion(name,i){

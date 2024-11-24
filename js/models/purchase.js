@@ -9,20 +9,22 @@ const paymentSchema=Schema({
 })
 
 const purchaseSchema = new Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false, default: null },
     products: [{
         productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
         quantity: { type: Number, required: true, min: 1 },
         price: { type: Number, required: true },
         size: {type:String, required:true}
     }],
-    name:{type:String},
-    email:{type:String},
+    name:{type:String,require:true},
+    surname:{type:String,require:true},
+    email:{type:String,require:true},
     phone:{type:String},
     address:{type:String},
     state:{type:String},
     city:{type:String},
     country:{type:String},
+    countryCode:{type:String},
     postCode:{type:String},
     code:{type:String,default:"-"},
     discount:{type:Number},

@@ -3688,6 +3688,12 @@ top: 2px;
   margin-bottom: 10px;
 }
 
+
+@media (max-width: 767px) {
+  .shipping-promo{
+    background-color: #000;
+  }
+}
 @media (max-width: 767px) {
   .item-details .product-info .title {
     font-size: 18px;

@@ -10,6 +10,7 @@ const axios = require('axios');
 const { Purchase } = require('./js/models');
 const { createProducts } = require('./add');
 const { sendEmail } = require('./js/helpers/sendEmail');
+const PaymenteRouter = require('./js/routers/paymentRouters');
 
 require('dotenv').config();
 
@@ -112,7 +113,11 @@ app.get('/success/:idPurchase', async (req, res) => {
 app.use('/api',UserRouter)
 app.use('/api',ProductRouter)
 app.use('/api',PurchaseRouter)
-
+app.get('/api/production', (req, res) => {
+  isProduction=process.env.ISPRODUCTION 
+  res.status(200).json({ isProduction });
+});
+app.use('/api',PaymenteRouter);
 app.get('/register', async(req, res) => {res.cookie('action', "register");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
 app.get('/login', async(req, res) => {res.cookie('action', "login");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
 app.get('/user', async(req, res) => {res.cookie('action', "user");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
