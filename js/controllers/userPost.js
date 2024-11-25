@@ -23,7 +23,8 @@ const userCreate=async(req,res)=>{
         const tokenE=jwt.sign({ uid: newuser.id,email:newuser.email}, process.env.SEED,{expiresIn:'12h'})
         await newuser.save()
         console.log(`http://${req.headers.host}/api/users/validar/${tokenE}`)
-        sendEmail({email:newuser.email,subject:"Your account was created. Verify your email",typeNro:2,button:{frase:"Verify email and get started",link:`http://${req.headers.host}/api/users/validar/${tokenE}`}})
+        body=`<p> Use the code "myFirstPurchase" to get $5 off your purchase.</p>`;
+        sendEmail({email:newuser.email, body,subject:"Your account was created. Verify your email",typeNro:2,button:{frase:"Verify email and get started",link:`http://${req.headers.host}/api/users/validar/${tokenE}`}})
         return res.status(200).json(await jsonAnswer(200,null,`The user has been created`,{user:newuser,link:`http://${req.headers.host}/login/users/validar/${tokenE}`}));
     } catch (error) {
         console.log(error)

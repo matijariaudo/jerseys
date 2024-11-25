@@ -11,7 +11,7 @@ const GOOGLE_SECRET=process.env.GOOGLE_SECRET||"";
 const ISPRODUCTION=process.env.ISPRODUCTION;
 const GOOGLE_CALLBACK=process.env.GOOGLE_CALLBACK;
 const GOOGLE_CALLBACK_LOCAL=process.env.GOOGLE_CALLBACK_LOCAL;
-const CALLBACKGOOGLE=ISPRODUCTION?GOOGLE_CALLBACK:GOOGLE_CALLBACK_LOCAL;
+const CALLBACKGOOGLE=ISPRODUCTION!="false"?GOOGLE_CALLBACK:GOOGLE_CALLBACK_LOCAL;
 
 const FACE_ID=process.env.FACE_ID||"";
 const FACE_SECRET=process.env.FACE_SECRET||"";
@@ -74,7 +74,8 @@ const loginTokensPassport=async(req, res) => {
         user=await new User({name,email,clave:"-",rol:"USER_ROLE",google:true,email_valid:true});
         console.log(user)
         console.log("ENVIAR CORREO A : ",email)
-        sendEmail({email,subject:"Welcome to xJersey",typeNro:1});
+        const body=`<p> Use the code <b>myFirstPurchase</b> to get $5 off your purchase.</p>`;
+        sendEmail({email,subject:"Welcome to xJersey",typeNro:1,body});
         await user.save();
     }
     const token=jwt.sign({ uid: user.id }, process.env.SEED,{expiresIn:'12h'})

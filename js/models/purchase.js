@@ -2,6 +2,7 @@ const {Schema,model} = require('mongoose');
 const mongoose = require('mongoose');
 
 const paymentSchema=Schema({
+    paypalId:{type:String},
     amount:{type:Number},
     currency:{type:String},
     paypalFee:{type:Number},

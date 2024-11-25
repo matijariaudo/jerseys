@@ -1,6 +1,7 @@
 require('dotenv').config()
 const axios = require('axios');
 const { Purchase } = require('../models');
+const { sendEmail } = require('../helpers/sendEmail');
 
 
 const PAYPAL_API = process.env.ISPRODUCTION!="false"?`https://api-m.paypal.com`:'https://api-m.sandbox.paypal.com';
@@ -80,6 +81,8 @@ const createOrder=async (req, res) => {
       const payment=extractPaymentDetails(response.data);
       purchase.payment=payment;
       await purchase.save()
+      body=`<p> Your purchase has been successful, we have received your payment.<br>Use your orderID (${purchaseId}) to track your order. Log in to your account with your email address, or create one if you don't have one (with this email address) to see the status of your order.<br><br>Payment reference: ${payment.paypalId}</p>`
+      sendEmail({email:purchase.email,subject:"Your purchase has been successful",body,typeNro:4});
       res.json({status: "OK"}); // Devuelve los detalles de la transacción
     } catch (err) {
       res.status(500).send({message:'Error capturing order',error:err.message});
@@ -93,8 +96,9 @@ const createOrder=async (req, res) => {
     if (!captureDetails || !captureDetails.status || captureDetails.status !== 'COMPLETED') {
         throw new Error('Payment capture failed or was not completed. If you see any funds on hold on your account statement, these should be released shortly. If they persist, please contact your bank.');
     }
-    
+    console.log(captureDetails)
     const paymentDetails = {
+      paypalId:captureDetails.id,
       amount: captureDetails.amount.value,
       currency: captureDetails.amount.currency_code,
       paypalFee: captureDetails.seller_receivable_breakdown.paypal_fee.value,

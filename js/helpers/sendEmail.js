@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 
-const creatHtml=(typeNro,button)=>{
+const creatHtml=(typeNro,button,body)=>{
 html=`
 <!DOCTYPE html>
 <html lang="en">
@@ -26,13 +26,17 @@ html=`
                             <p style="color: #666666;">Please, click in the following button to validate your email.</p>
                             `:""}
                             ${typeNro==3?`
-                            <h1 style="color: #333333;"><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"><br>Reset your password</h1>
-                            <p style="color: #666666;">You have requested to reset your password. Click the button below to proceed.</p>
+                            <h1 style="color: #333333;"><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"><br>Your purchase has been successful.</h1>
+                            <p style="color: #666666;"></p>
+                            `:""}
+                            ${typeNro==4?`
+                            <h1 style="color: #333333;"><img src="https://xjersey.store/assets/images/logos/logo.png" style="max-width:150px"><br>Your purchase has been successful!</h1>
                             `:""}
                             ${button?`<a href="${button.link}" style="display: inline-block; background-color: #78FFB6; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px;">${button.frase}</a>
                             `:""}
                             ${typeNro==3?`<p style="color: #999999; margin-top: 20px;">If you didn't request a password reset, you can safely ignore this email.</p>
                             `:""}
+                            ${body}
                         </td>
                     </tr>
                 </table>
@@ -46,8 +50,7 @@ return html
 }
 
 
-const sendEmail=async({email,subject,typeNro,button})=>{
-console.log(process.env.EMAIL_ACCOUNT,process.env.EMAIL_CLAVE)
+const sendEmail=async({email,subject,typeNro,button,body})=>{
 let mailTransporter =
 	nodemailer.createTransport(
 		{
@@ -65,7 +68,7 @@ let mailDetails = {
 	from:  `Matias from xJersey <${process.env.EMAIL_ACCOUNT}>`,
 	to: email,
 	subject: `xJersey: ${subject}`,
-	html: creatHtml(typeNro,button)
+	html: creatHtml(typeNro,button,body)
 };
 
 mailTransporter

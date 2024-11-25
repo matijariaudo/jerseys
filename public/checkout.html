@@ -273,6 +273,23 @@
                     
                 </div>
             </div>
+            <div class="row card p-3 capa capa_10">
+                <div class="single-form form-default row">
+                    <h4>
+                        <img src="https://png.pngtree.com/png-clipart/20230418/original/pngtree-online-purchase-line-icon-png-image_9065517.png" style="width: 38px;"> 
+                        How do you want to proceed?
+                    </h4>
+                    <hr style="margin: 15px 0px;">
+                    <div class="checkout-sidebar-price-table mt-30" style="border: 0px; margin-top: 0px; padding-top: 0px; margin-bottom: 0px; padding-bottom: 0px;">
+                        <p>Create an account to track your orders, enjoy exclusive benefits, and get <b>$5 off</b> your first purchase! Or continue as a guest to complete your purchase quickly.</p>
+                        <center>
+                            <button class="btn btn-green w-50 mb-10 mt-10" onclick="location.href='/register'">Register Now</button>
+                            <button class="btn btn-dark w-50 mb-10" onclick="capa(1)">Continue as Guest</button>
+                            <button class="btn btn-light w-50" onclick="location.href='/login'" style="font-size: 14px; color: #555; border: 1px solid #ccc;">I already have an account</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="checkout-steps-form-style-1 col-lg-6 offset-lg-1 col-md-6 offset-md-1 col-12"  style="padding:0px 25px">
                 <div class="row card p-3 capa capa_1">
@@ -583,7 +600,10 @@
         $(window).on('load',()=>{
             if(user.token){
             //$("#name_form").val(user.user.name)
-            $("#email_form").val(user.user.email)
+                $("#email_form").val(user.user.email)
+                $("#email_form").attr("disabled",true)
+            }else{
+                capa(10)
             }
             $(".order-id").html(localStorage.getItem("cartCode") || "-");
         })
