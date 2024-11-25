@@ -57,7 +57,7 @@ const productSchema=Schema({
         type:Number,
         default:0
     },
-    estado:{
+    status:{
         type:Boolean,
         default:true
     }

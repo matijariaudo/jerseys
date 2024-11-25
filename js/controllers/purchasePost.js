@@ -14,7 +14,7 @@ const purchaseCreate=async(req,res)=>{
             const { productId } = products[i];
             const product = await Product.findById(productId);
             products[i].price = product.price;
-            totalAmount += product.price;
+            totalAmount += products[i].quantity*product.price;
             console.log(product.price); 
         }
 

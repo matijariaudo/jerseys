@@ -1,32 +1,21 @@
-sports=['Basketball','Soccer'];
-categories=[
-    {category:'National teams',link:'Soccer'},
-    {category:'Italy',link:'Soccer'},
-    {category:'France',link:'Soccer'},
-    {category:'Germany',link:'Soccer'},
-    {category:'England',link:'Soccer'},
-    {category:'Spain',link:'Soccer'},
-    {category:'America',link:'Soccer'},
-];
-teams=[
-    {team:'Juventus',link:'Italy'},
-    {team:'Inter',link:'Italy'},
-    {team:'Milan',link:'Italy'},
-    {team:'Boca',link:'America'},
-    {team:'Argentina',link:'National teams'},
-    {team:'Brazil',link:'National teams'},
-    {team:'Colombia',link:'National teams'},
-    {team:'Chile',link:'National teams'},
-    {team:'Uruguay',link:'National teams'},
-]
-
+let teamData;
 $(".club_menu").html("")
 ajax('/api/categories',{},(e)=>{
     const {categories:categoriesObj,teams:teamsObj}=e.data;
     categories= Object.keys(categoriesObj);
-    console.log(categories);
     teams=Object.keys(teamsObj);
-    teams=teams.sort().map(a=>{return {team:a,link:teamsObj[a]};})
+    teams=teams.sort().map(a=>{return {team:a,link:teamsObj[a],sport:categoriesObj[teamsObj[a]]}})
+    teamData=teams;
+    $("#seach-input").on("keyup",function(){
+        $("#seach-div").html("")
+        if($(this).val().length>2){
+        teamData.forEach(e => {
+            if(e.team.toLowerCase().indexOf($(this).val().toLowerCase())>-1){
+                $("#seach-div").append(`<div  onclick="location.href='/products/${e.sport.toLowerCase().replaceAll(' ','')}/${e.link.toLowerCase().replaceAll(' ','')}/${e.team.toLowerCase().replaceAll(' ','')}'" class="list-group-item list-group-item-action" style="cursor:pointer"><p class="mb-0" style="font-size:.8em">${e.sport}/${e.link}</p><h6>${e.team}</h6></div>`)
+            }
+        });
+        }
+    })
     $(".national_menu").html(`<li class="nav-item"><a href="/products/soccer/nationalteams"><img src="assets/images/logos/teams/otherteams.png" alt="" style="height: 25px;"> See all nations</a></li>`)
     qty=0;
     teams.filter(a=>a.link=='National teams').forEach((e,i) => {

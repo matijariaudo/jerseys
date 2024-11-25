@@ -13,13 +13,13 @@ const getProducts = async (req, res) => {
         const order = sortOrder === 'desc' ? -1 : 1;
 
         const filter = {};
-        if (status !== undefined) filter.status = status === 'true';
+        //status?filter={status}:filter={status:true};
 
         // Simplificación del regex para hacerlo insensible a mayúsculas/minúsculas
         if (sport) filter.sport = { $regex: sport, $options: 'i' };
         if (category) filter.categoryFilter = { $regex: category, $options: 'i' };
         if (team) filter.teamFilter = { $regex: team, $options: 'i' };
-
+        console.log(filter,"filter")
         const totalRecords = await Product.countDocuments(filter);
 
         // Consistencia en el orden
@@ -28,9 +28,6 @@ const getProducts = async (req, res) => {
             .skip(start)
             .limit(limit);
         
-        products.forEach(e => {
-            console.log(e.year, e.product);
-        });
 
         return res.status(200).json(await jsonAnswer(200, null, 'Successful Operation', {
             totalRecords,

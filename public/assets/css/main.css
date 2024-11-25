@@ -1990,7 +1990,7 @@ top: -1px;
 
 @media (max-width: 767px) {
   .header .main-menu-search {
-    display: none;
+    
   }
 }
 
@@ -2061,7 +2061,7 @@ top: -1px;
   border: 1px solid #e2e2e2;
   background-color: #fff;
   color: #000;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 0 15px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;

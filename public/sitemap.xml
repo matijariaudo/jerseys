@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página principal -->
+  <url>
+    <loc>https://xjersey.store/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Productos -->
+  <url>
+    <loc>https://xjersey.store/products/</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Login -->
+  <url>
+    <loc>https://xjersey.store/login</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>

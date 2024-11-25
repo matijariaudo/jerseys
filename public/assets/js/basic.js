@@ -125,3 +125,15 @@ function getCookie(name) {
         const fileName = partUrl[tamano-3]+"-"+partUrl[tamano-2]+"-"+partUrl[tamano-1];
         return fileName;
     }
+
+    function formatearFecha(fechaMongo) {
+        const fecha = new Date(fechaMongo); // Convierte la fecha recibida en un objeto Date
+    
+        const hora = String(fecha.getHours()).padStart(2, '0');
+        const minuto = String(fecha.getMinutes()).padStart(2, '0');
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+        const año = fecha.getFullYear();
+    
+        return `${hora}:${minuto} ${dia}/${mes}/${año}`;
+    }

@@ -6,19 +6,23 @@ const axios = require('axios');
 function createProducts(){
     async function fetchJson() {
     try {
+        console.log(1)
         const response = await axios.get('http://localhost/scrapfutbol/apiweb.php');
         const jsonData = response.data;
+        console.log(2)
         if(!jsonData){return null;}
         if(jsonData.length<10){return error;}
+        console.log(3)
         await Product.updateMany({}, { $set: { status: false } });
         jsonData.forEach(async e => {
           const {code,product,sport,category,team,mainImg,images,year}=e
           await Product.findOneAndUpdate(
             { code }, // Filtro para buscar el producto por código
-            { product, code , price:49,sport,category,team,mainImg,images,year,categoryFilter:category.replaceAll(" ","").toLowerCase(),teamFilter:team.replaceAll(" ","").toLowerCase(),status:true}, // Datos a actualizar o insertar
+            { product, code , price:34.99,sport,category,team,mainImg,images,year,categoryFilter:category.replaceAll(" ","").toLowerCase(),teamFilter:team.replaceAll(" ","").toLowerCase(),status:true}, // Datos a actualizar o insertar
             { upsert: true, new: true } // `upsert: true` crea el documento si no existe
           );
         });
+        console.log("productos actualizados")
     } catch (error) {
         console.error('Error al obtener el JSON:', error.message);
     }
