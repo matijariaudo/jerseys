@@ -514,7 +514,7 @@
                             <h2 class="wow fadeInUp" data-wow-delay=".4s">Can't find your favorite product? <br> <b style="color: #60f2c2;">Write us</b> and we will find it for you.</h2>
                             <p class="wow fadeInUp" data-wow-delay=".6s"></p>
                             <div class="fadeInUp" data-wow-delay=".8s">
-                                <button class="btn btn-green"  onclick="location.href='/register'">Chat with us</button>
+                                <button class="btn btn-green"  onclick="sendMessage()">Chat with us</button>
                             </div>
                         </div>
                     </div>
@@ -626,7 +626,7 @@
                                     <li><a href="javascript:void(0)">About Us</a></li>
                                     <li><a href="javascript:void(0)">Contact Us</a></li>
                                     <li><a href="javascript:void(0)">Downloads</a></li>
-                                    <li><a href="javascript:void(0)">Sitemap</a></li>
+                                    <li><a href="/sitemap">Sitemap</a></li>
                                     <li><a href="javascript:void(0)">FAQs Page</a></li>
                                 </ul>
                             </div>
@@ -698,7 +698,12 @@
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/data.js"></script>
     <script>
-       
+       function sendMessage() {
+            const phoneNumber = "+61468774995"; // Reemplaza con el número de WhatsApp (sin + ni espacios)
+            const message = encodeURIComponent("Hi, I'm interested in finding a specific jersey.");
+            const url = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(url, '_blank');
+        }
     
     </script>
     <script type="text/javascript">

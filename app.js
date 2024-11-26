@@ -110,6 +110,10 @@ app.get('/success/:idPurchase', async (req, res) => {
   res.redirect(`/orders/${idPurchase}`);
 });
 
+app.get('/sitemap', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'sitemap.xml'))});
+app.get('/sitemap.xml', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'sitemap.xml'))});
+app.get('/robot.txt', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'robot.txt'))});
+
 app.use('/api',UserRouter)
 app.use('/api',ProductRouter)
 app.use('/api',PurchaseRouter)
@@ -158,7 +162,7 @@ app.listen(PORT, async() => {
   console.log("Conectando BD")
   await dbConnection();
   //sendEmail({email:"matiariaudo@gmail.com",subject:"Welcome to xJersey",typeNro:1,body});
-  //await createProducts();
+  await createProducts();
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 
