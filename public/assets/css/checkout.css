@@ -70,6 +70,9 @@
     .checkout-steps-form-style-1 .single-form .form-input:last-child {
       margin-bottom: 0;
     }
+    .checkout-sidebar-price-table {
+      padding: 25px 10px;
+    }
   }
   
   .checkout-steps-form-style-1 .single-form .form-input textarea,

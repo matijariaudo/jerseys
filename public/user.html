@@ -245,8 +245,9 @@
                     <div class="register-form row">
                         <div class="title">
                             <h3>Your account was created successfully!</h3>
-                            <p>We have sent you an email to confirm your address and you can access your account! <br>
-                                <b>Attention:</b> Don't forget to check your spam box</p>
+                            <p>We have sent you an email to confirm your address and you can access your account!
+                            </p>
+                            <p style="margin-top: 10px;font-size: 1em;background-color: #60f2c134;text-align: center;border-radius: 10px;padding: 10px;color:#000;"><b>Attention:</b> Don't forget to check your spam box</p>
                         </div>
                     </div>
                 </div>
@@ -275,13 +276,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-                    <div class="register-form row">
+                    <div class="card login-form">
                         <div class="title">
-                            <h3>No Account? Register</h3>
-                            <p>Registration takes less than a minute but gives you full control over your orders.</p>
+                            <h3>Create your account</h3>
+                            <p>You can register using your social media account or email address.</p>
                         </div>
-                        <div class="col-sm-12" style="margin-bottom: 10px;">
-                            <a class="btn google-btn" href="api/logingoogle" style="border:1px solid rgb(232, 63, 63);font-size:.8em;color:rgb(232, 63, 63);width: 100%;"><i class="lni lni-google" style="font-size: 1.1em;padding: 6px 0px;"></i> Google login</a>
+                        <div class="social-login">
+                            <div class="row">
+                                <div class="col-12 d-none"><a class="btn facebook-btn" href="javascript:void(0)"><i class="lni lni-facebook-filled"></i> Facebook
+                                        login</a></div>
+                                <div class="col-12"><a class="btn google-btn" href="api/logingoogle"><i class="lni lni-google"></i> Google login</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="alt-option">
                             <span>Or</span>
@@ -292,6 +298,7 @@
                                     <input class="form-control" id="form_name" type="text" id="reg-ln" required="">
                                 </div>
                             </div>
+                            <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reg-email">E-mail Address</label>
@@ -316,6 +323,7 @@
                                     <input class="form-control" id="form_password_2" type="password" id="reg-pass-confirm" required="">
                                 </div>
                             </div>
+                            </div>
                             <div class="button">
                                 <p id="form_problema"></p>
                                 <button class="btn" type="submit" onclick="register()">Register</button>
@@ -332,7 +340,6 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
                     <div class="card login-form">
-                        <div class="card-body">
                             <div class="title">
                                 <h3>Login Now</h3>
                                 <p>You can login using your social media account or email address.</p>
@@ -365,7 +372,7 @@
                             </div>
                             <p class="outer-link">Don't have an account? <a onclick="capa(2)">Register here </a>
                             </p>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -555,7 +562,6 @@
 
     <!-- ========================= JS here ========================= -->
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/basic.js"></script>

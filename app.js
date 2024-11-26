@@ -161,7 +161,8 @@ app.get('*', async(req, res) => {
 app.listen(PORT, async() => {
   console.log("Conectando BD")
   await dbConnection();
-  //sendEmail({email:"matiariaudo@gmail.com",subject:"Welcome to xJersey",typeNro:1,body});
+  const body=`<p> Use the code <b>myFirstPurchase</b> to get $5 off your purchase.</p>`;
+  sendEmail({email:"dresssocutefeelsonice@gmail.com",subject:"Welcome to xJersey",typeNro:1,body});
   await createProducts();
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });

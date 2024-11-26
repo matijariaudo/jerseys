@@ -48,7 +48,7 @@ function getCookie(name) {
                 checktoken(user.token)
             }else{
                 localStorage.removeItem("user");
-                checkPromo();
+                //checkPromo();
             }
         }
     });

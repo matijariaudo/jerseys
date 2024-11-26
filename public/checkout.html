@@ -402,8 +402,18 @@
                                     <p class="value">Total Price:</p>
                                     <p class="price shopping-total-cart">-</p>
                                 </div>
+                                <div class="payable-price">
+                                    <p class="value">Local Price:</p>
+                                    <p class="price shopping-total-cart priceLocal">-</p>
+                                </div>
                             </div>
-                            <div id="paypal-button-container"></div>
+                            <p class="w-100" style="font-size: .75em;margin: -10px 0px 0px 0px;">*Estimated value u$d 1 =<ff class="rateLocal"></ff></p>
+                        
+                            <div style="margin: 10px 0px;font-size: 1em;background-color: #60f2c134;text-align: center;border-radius: 10px;padding: 10px;color:#000;">
+                            </b>Attention:</b> Avoid <b style="color: #000;">Paypal conversion</b> to your local currency, we recommend paying in USD to avoid an extra cost of up to 5%
+                            <button class="btn btn-dark w-75" style="margin-top: 20px;" onclick="$('#paypal-button-container').show();$(this).hide()">Ok, I got it. <b>PAY NOW!</b></button>
+                            </div>
+                            <div id="paypal-button-container" style="display: none;"></div>
                           </div>
                         
                     </div>
@@ -449,6 +459,11 @@
                                 <p class="value">Total Price:</p>
                                 <p class="price shopping-total-cart">-</p>
                             </div>
+                            <div class="payable-price">
+                                <p class="value">Local Price:</p>
+                                <p class="price shopping-total-cart priceLocal">-</p>
+                            </div>
+                            <p class="w-100" style="font-size: .75em;">*Estimated value u$d 1 =<ff class="rateLocal"></ff><br>From <b>xJersey</b> we recommend paying in USD(Do not use paypal convert) to get a similar exchange rate to the one shown.</p>
                         </div>
                     </div>
                 </div>
@@ -603,7 +618,7 @@
                 $("#email_form").val(user.user.email)
                 $("#email_form").attr("disabled",true)
             }else{
-                capa(10)
+                capa(1)
             }
             $(".order-id").html(localStorage.getItem("cartCode") || "-");
         })
@@ -634,7 +649,9 @@
                     $(".shopping-discount-cart").html((discValue>0?"-":"")+discValue+" U$D");
                     totalQty>1?shippingVal=0:shippingVal=5.99;
                     $(".shopping-shipping-cart").html(+shippingVal==0?"<b style='color:#4cbd97;'>FREE SHIPPING!</b><p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>2 or more products</p>":`<p class='' style='font-size:.8em;text-align:right;margin-top:-10px'>Get <b>free shipping!</b> Buy 2 units</p><ff style='float:right'>U$D ${shippingVal}</ff>`);
-                    $(".shopping-total-cart").html((totalPrice-parseFloat(discValue)+(shippingVal)).toFixed(2)+" U$D");
+                    priceUSD=totalPrice-parseFloat(discValue)+(shippingVal);
+                    $(".shopping-total-cart").html((priceUSD).toFixed(2)+" U$D");
+                    localPrice(priceUSD)
                 },()=>{
                     location.href="/"
                 })    
@@ -751,6 +768,32 @@
         }
     </script>
     <script type="text/javascript">
+        function localPrice(priceUSD)
+        {  
+            // Paso 1: Detectar la ubicación del usuario
+            fetch('https://ipapi.co/json/') // Servicio gratuito para detección de IP
+            .then(response => response.json())
+            .then(data => {
+                const userCountry = data.country;
+                const currencyCode = data.currency; // Ejemplo: USD, EUR, etc.
+                console.log(`País: ${userCountry}, Moneda: ${currencyCode}`);
+                
+                // Paso 2: Obtener la tasa de cambio
+                fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
+                .then(response => response.json())
+                .then(exchangeData => {
+                    const exchangeRate = exchangeData.rates[currencyCode];
+                    const localPrice = (priceUSD * exchangeRate).toFixed(2);
+                    
+                    // Paso 3: Mostrar el precio en la moneda local
+                    console.log(`Precio aproximado en ${currencyCode}: ${localPrice}`);
+                    $('.priceLocal').html(`${localPrice} ${currencyCode}`);
+                    $(".rateLocal").html(`${exchangeRate} ${currencyCode}`)
+                })
+                .catch(err => console.error('Error fetching exchange rate:', err));
+            })
+            .catch(err => console.error('Error detecting location:', err));
+        }
         const countries=[
             { "name": "Afghanistan", "code": "AF" },
             { "name": "Albania", "code": "AL" },
