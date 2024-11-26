@@ -112,7 +112,7 @@ app.get('/success/:idPurchase', async (req, res) => {
 
 app.get('/sitemap', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'sitemap.xml'))});
 app.get('/sitemap.xml', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'sitemap.xml'))});
-app.get('/robot.txt', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'robot.txt'))});
+app.get('/robots.txt', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'robots.txt'))});
 
 app.use('/api',UserRouter)
 app.use('/api',ProductRouter)
