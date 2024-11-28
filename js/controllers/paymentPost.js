@@ -83,6 +83,7 @@ const createOrder=async (req, res) => {
       await purchase.save()
       body=`<p> Your purchase has been successful, we have received your payment.<br>Use your orderID (${purchaseId}) to track your order. Log in to your account with your email address, or create one if you don't have one (with this email address) to see the status of your order.<br><br>Payment reference: ${payment.paypalId}</p>`
       sendEmail({email:purchase.email,subject:"Your purchase has been successful",body,typeNro:4});
+      sendEmail({email:"xjerseyweb@gmail.com",subject:"Your purchase has been successful",body,typeNro:4});
       res.json({status: "OK"}); // Devuelve los detalles de la transacción
     } catch (err) {
       res.status(500).send({message:'Error capturing order',error:err.message});

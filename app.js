@@ -163,7 +163,7 @@ app.listen(PORT, async() => {
   await dbConnection();
   //const body=`<p> Use the code <b>myFirstPurchase</b> to get $5 off your purchase.</p>`;
   //sendEmail({email:"dresssocutefeelsonice@gmail.com",subject:"Welcome to xJersey",typeNro:1,body});
-  //await createProducts();
+  await createProducts();
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 

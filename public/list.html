@@ -605,11 +605,11 @@
                         </div>
                         <div class="product-info" style="${s.product.toLowerCase().indexOf('women')>-1?"background:#fcd7de":""}">
                             <span class="category">${s.category}</span>
-                            <span class="category">${s.code}</span>
                             <span class="category">${s.team}</span>
                             <h4 class="title">
-                                <a href="/product/${s.code}">${s.product}</a>
+                                <a href="/product/${s.code}">${s.product.toLowerCase().indexOf('women')>-1?"<img src='https://cdn-icons-png.flaticon.com/512/1313/1313986.png' style='width:15px'>":""}${s.product}</a>
                             </h4>
+                            <span class="category">CODE: ${s.code}</span>
                             <ul class="review" style="display:none">
                                 <li><i class="lni lni-star-filled"></i></li>
                                 <li><i class="lni lni-star-filled"></i></li>
