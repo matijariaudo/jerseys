@@ -269,6 +269,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-12 mt-10">
+                                    <input type="checkbox" id="retro_form"> Only retro Jerseys  <input type="checkbox" id="women_form" style="margin-left: 20px;"> Only women Jerseys
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-8 offset-lg-2">
@@ -534,18 +537,33 @@
             
         }
             
-        
-
+        $("#retro_form").on("change",function(){
+            localStorage.setItem("retro",$(this).prop("checked"));
+            location.href=location.href;
+        })
+        $("#retro_form").prop("checked",localStorage.getItem("retro")=="true")
+        $("#women_form").on("change",function(){
+            localStorage.setItem("women",$(this).prop("checked"));
+            location.href=location.href;
+        })
+        $("#women_form").prop("checked",localStorage.getItem("women")=="true")
 
 
         const start= ()=>{
+            let product;let women;
+            if($("#retro_form").prop("checked")){
+                product="retro";
+            }
+            if($("#women_form").prop("checked")){
+                women="women";
+            }
             const sport=$("#sports_form").val()!="All"?$("#sports_form").val():undefined;
             const category=$("#categories_form").val()!="All"?$("#categories_form").val():undefined;
             const team=$("#teams_form").val()!="All"?$("#teams_form").val():undefined;
             let pag=getParameterByName("pag") || 1;
             if(pag<1){pag=1}
             qtyReg=20;
-            ajax('/api/products',{qty:qtyReg,init:(qtyReg*(parseInt(pag)-1)),sport,team,category},(e)=>{
+            ajax('/api/products',{qty:qtyReg,init:(qtyReg*(parseInt(pag)-1)),sport,team,category,product,women},(e)=>{
                 const {products,totalRecords,qty,init}=e.data;
                 products.forEach(e => {
                     $("#product_list").append(print_product(e))

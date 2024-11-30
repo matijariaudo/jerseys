@@ -7,7 +7,7 @@ const path = require('path');
 
 const getProducts = async (req, res) => {
     try {
-        const { init = 0, qty = 12, sortBy = 'year', sortOrder = 'desc', status, sport, category, team } = req.body;
+        const { init = 0, qty = 12, sortBy = 'year', sortOrder = 'desc', status, sport, category, team,product,women } = req.body;
         const start = parseInt(init, 10) || 0;
         const limit = parseInt(qty, 10) || 10;
         const order = sortOrder === 'desc' ? -1 : 1;
@@ -16,6 +16,8 @@ const getProducts = async (req, res) => {
         //status?filter={status}:filter={status:true};
 
         // Simplificación del regex para hacerlo insensible a mayúsculas/minúsculas
+        if (product) filter.product = { $regex: product, $options: 'i' }; // Filtro adicional para "product"
+        if (women) filter.product = { $regex: women, $options: 'i' }; // Filtro adicional para "product"
         if (sport) filter.sport = { $regex: sport, $options: 'i' };
         if (category) filter.categoryFilter = { $regex: category, $options: 'i' };
         if (team) filter.teamFilter = { $regex: team, $options: 'i' };
@@ -24,7 +26,7 @@ const getProducts = async (req, res) => {
 
         // Consistencia en el orden
         const products = await Product.find(filter)
-            .sort({ [sortBy]: order }) // Orden estable con `_id`
+            .sort({ [sortBy]: order,_id: 1 }) // Orden estable con `_id`
             .skip(start)
             .limit(limit);
         

@@ -7,7 +7,7 @@ const { sendEmail } = require('../helpers/sendEmail');
 const PAYPAL_API = process.env.ISPRODUCTION!="false"?`https://api-m.paypal.com`:'https://api-m.sandbox.paypal.com';
 const CLIENT_ID= process.env.PAYPAL_CLIENT_ID;
 const CLIENT_SECRET= process.env.PAYPAL_SECRET;
-console.log("PAYPAL",CLIENT_ID,CLIENT_SECRET,PAYPAL_API)
+
 const createOrder=async (req, res) => {
     const { purchaseId } = req.body;
     const purchase=await Purchase.findById(purchaseId)
