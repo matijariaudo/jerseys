@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Filter Table</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="assets/js/ajax.js"></script>
+</head>
+<body class="p-4">
+
+    <div class="container">
+        <h2 class="mb-3">Filterable Table</h2>
+        <input type="text" id="search" class="form-control mb-3" placeholder="Search in table...">
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr  style="text-align: center;">
+                    <th>Name</th>
+                    <th>Products</th>
+                    <th>Status</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tableBody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        ajax('/api/users/all/purchases',{},(e)=>{
+            e.data.purchases.forEach(s => {
+                htmlImg="";htmlP=""
+                s.productDetails.forEach((pr,i)=>{
+                    console.log(s.products[i])
+                    htmlImg+=`<img src="assets/images/products/${convertImgUrl(pr.mainImg)}" onError="errorImg($(this),'${pr.mainImg}')"  title="${pr.product} (${pr.team})" style="border-radius:3px;width:60px;margin-right:2px">`;
+                    htmlP+=`<p style="font-size:.58em;margin:0px" title="${pr.product} (${pr.team})">${s.products[i].quantity} x ${pr.code} (${s.products[i].size}) ->$${s.products[i].price}</p>`;
+                })
+                htmlverif=
+                $("#tableBody").append(`<tr>
+                    <td>${s.name} ${s.surname}
+                        <p style="font-size:.7em;margin:0px">${s.email} (${s.phone}) - ${formatDate(s.purchaseDate)}</p>
+                        <p style="font-size:.7em;margin:0px">${s.address},${s.city}(${s.postCode}),${s.state},${s.country}</p>
+                        <p style="font-size:.7em;margin:0px">${s.payment?s.payment.type?`${s.payment.type}${s.payment.type=='bankTransfer'?` <a style="font-size:.8em"><input type="checkbox" class="paymentVerified" data="${s.id}"> Verificado</a>`:''}`:'-':'-'}</p>
+                    </td>
+                    
+                    <td style="min-width:150px;text-align:center">${htmlImg+htmlP}</td>
+                    <td>
+                        <select class="purchaseStatus" data="${s.id}" style="border-radius:10px;border:0px;cursor:pointer;background:none">
+                        <option value="created" ${s.status=='created'?'selected':''}>created</option>
+                        <option value="deleted" ${s.status=='deleted'?'selected':''}>deleted</option>
+                        <option value="inProcess" ${s.status=='inProcess'?'selected':''}>inProcess</option>
+                        </select>
+                    </td>
+                    <td style="font-size:.8em">Notas Imprimir</td>
+                    </tr>`)
+            });
+            $(".purchaseStatus").on('change',function (){
+                const purchaseId=$(this).attr('data');
+                const newStatus=$(this).val();
+                alert(purchaseId+" "+newStatus)
+            })
+            $(".paymentVerified").on('change',function (){
+                const purchaseId=$(this).attr('data');
+                const newStatus=$(this).prop('checked');
+                alert(purchaseId+" "+newStatus)
+            })
+        })
+
+        
+
+    </script>
+
+</body>
+</html>

@@ -25,7 +25,7 @@ function getCookie(name) {
     function capa(i) {
         $(".capa").hide();
         $(".capa_"+i).show()
-        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        //$('html, body').animate({ scrollTop: 0 }, 'slow');
     }
     
     function seccion(name,i){
@@ -92,15 +92,16 @@ function getCookie(name) {
         }
         promotionN=localStorage.getItem("promotion_n")
         if(!promotionN){return true;}
-        if(promotionN==0){insert_modal();$('#myModal').modal('show');$(".code_show").html(localStorage.getItem("promotion"))}
+        if(promotionN==0){insert_modal("myModal");$('#myModal').modal('show');$(".code_show").html(localStorage.getItem("promotion"))}
         promotionN==3?promotionN=0:promotionN++;
         localStorage.setItem("promotion_n",promotionN); 
     }
 
-    function insert_modal(){
+    
+    function insert_modal(id){
         $("body").append(`
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header" style="border:0px">

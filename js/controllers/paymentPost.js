@@ -2,6 +2,9 @@ require('dotenv').config()
 const axios = require('axios');
 const { Purchase } = require('../models');
 const { sendEmail } = require('../helpers/sendEmail');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 
 const PAYPAL_API = process.env.ISPRODUCTION!="false"?`https://api-m.paypal.com`:'https://api-m.sandbox.paypal.com';
@@ -64,31 +67,68 @@ const createOrder=async (req, res) => {
  // Ruta para capturar el pago
  const capturePayment=async (req, res) => {
     const { orderID ,purchaseId} = req.body;
-    const purchase=await Purchase.findById(purchaseId)
-    if(!purchase){
-    //    return res.status(500).send('Error capturing order: No Order Id');
-    }
-    if(purchase.payment){
-    //    return res.status(500).send('Error capturing order: Order finished');
-    }
     try {
+      const purchase=await Purchase.findById(purchaseId)
+      if(!purchase){throw new Error('No purchase found');}
       const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${orderID}/capture`, {}, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
-        }
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
+      }
       });
       const payment=extractPaymentDetails(response.data);
       purchase.payment=payment;
+      purchase.status='inProcess';
       await purchase.save()
       body=`<p> Your purchase has been successful, we have received your payment.<br>Use your orderID (${purchaseId}) to track your order. Log in to your account with your email address, or create one if you don't have one (with this email address) to see the status of your order.<br><br>Payment reference: ${payment.paypalId}</p>`
-      sendEmail({email:purchase.email,subject:"Your purchase has been successful",body,typeNro:4});
-      sendEmail({email:"xjerseyweb@gmail.com",subject:"Your purchase has been successful",body,typeNro:4});
-      res.json({status: "OK"}); // Devuelve los detalles de la transacción
+      try {
+        sendEmail({email:purchase.email,subject:"Your purchase has been successful",body,typeNro:4});
+        sendEmail({email:"xjerseyweb@gmail.com",subject:"Your purchase has been successful",body,typeNro:4});
+      }finally {
+        // Este bloque se ejecuta siempre, incluso si hay un error (puede estar vacío)
+        return res.json({status: "OK"}); // Devuelve los detalles de la transacción
+      }
     } catch (err) {
-      res.status(500).send({message:'Error capturing order',error:err.message});
+      console.log(err)
+      return res.status(500).send({message:'Error capturing order',error:err.message});
     }
   }
+
+
+// Crear carpeta /transferencias si no existe
+const dir = './public/assets/images/transferencias';
+if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, dir+'/'),
+  filename: (req, file, cb) => cb(null, req.body.purchaseId+`${file.fieldname=='file1'?'_comprobante':'_dni'}`+ path.extname(file.originalname))
+});
+
+const multerUpload = multer({ storage }).fields([
+  { name: 'file1', maxCount: 1 }, // PDF o imagen
+  { name: 'file2', maxCount: 1 }  // Solo imagen
+]);
+
+const paymentByTransfer=async(req, res) => {
+  const {purchaseId}=req.body;
+  try {
+    const purchase=await Purchase.findById(purchaseId);
+    if(!purchase){
+      throw new Error('Purchase no found.')
+    }
+    purchase.payment={document: req.files['file1']?.[0]?.filename+"//"+req.files['file2']?.[0]?.filename,amount:purchase.finalAmount,type:'bankTransfer'}
+    purchase.status='inProcess';
+    purchase.save();
+    return res.json({
+      purchase,
+      file1: req.files['file1']?.[0]?.filename,
+      file2: req.files['file2']?.[0]?.filename
+    });
+  } catch (error) {
+    return res.json({error:error.message})
+  }
+
+}
 
 
   function extractPaymentDetails(captureData) {
@@ -102,14 +142,15 @@ const createOrder=async (req, res) => {
       paypalId:captureDetails.id,
       amount: captureDetails.amount.value,
       currency: captureDetails.amount.currency_code,
-      paypalFee: captureDetails.seller_receivable_breakdown.paypal_fee.value,
+      fee: captureDetails.seller_receivable_breakdown.paypal_fee.value,
       netAmount: captureDetails.seller_receivable_breakdown.net_amount.value,
       receivableAmount: captureDetails.seller_receivable_breakdown.receivable_amount.value,
       receivableCurrency: captureDetails.seller_receivable_breakdown.receivable_amount.currency_code,
       exchangeRate: captureDetails.seller_receivable_breakdown.exchange_rate.value,
+      type:'paypal'
     };
   
     return paymentDetails;
   }
   
-module.exports={createOrder,capturePayment}
+module.exports={createOrder,capturePayment,paymentByTransfer,multerUpload}

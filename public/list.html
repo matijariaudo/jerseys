@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body id="google-translate">
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -77,10 +77,10 @@
                             </div>
                             <ul class="user-login no_user">
                                 <li>
-                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i>  Log In</a>
+                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i>  Inicia sesión</a>
                                 </li>
                                 <li>
-                                    <a href="/register">Create account</a>
+                                    <a href="/register">Creá tu cuenta</a>
                                 </li>
                             </ul>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="col-lg-3 col-md-3 col-7 p-3 p-md-1 order-1">
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="/">
-                            <img src="assets/images/logos/logo.png" alt="Logo" style="width: 150px;">
+                            <img src="assets/images/logos/logocasaca.png" alt="Logo" style="width: 230px;">
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -106,7 +106,7 @@
                             <!-- navbar search start -->
                             <div class="navbar-search search-style-5">
                             <div class="search-input">
-                                    <input type="text" id="seach-input" placeholder="Search your team" autocomplete="off">
+                                    <input type="text" id="seach-input" placeholder="Buscá tu equipo" autocomplete="off">
                                     <div id="seach-div" class="list-group position-absolute w-100 " style="z-index: 99999;"> 
 
                                       </div>
@@ -140,7 +140,7 @@
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
                                             <span><ff class="shopping-qty"></ff> Items</span>
-                                            <a href="/cart">View Cart</a>
+                                            <a href="/cart">Ver carrito</a>
                                         </div>
                                         <ul class="shopping-list">
                                             
@@ -151,7 +151,7 @@
                                                 <span class="total-amount">$<ff class="shopping-total-amount"></ff></span>
                                             </div>
                                             <div class="button">
-                                                <a href="/checkout" class="btn animate">Checkout</a>
+                                                <a href="/checkout" class="btn animate">Finalizar compra</a>
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                             data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">Club Teams</a>
+                                            aria-expanded="false" aria-label="Toggle navigation">Clubes de futbol</a>
                                         <ul class="sub-menu collapse club_menu" id="submenu-1-2">
                                             <li class="nav-item"><a href="about-us.html">All</a></li>
                                         </ul>
@@ -195,7 +195,7 @@
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                             data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">National Teams</a>
+                                            aria-expanded="false" aria-label="Toggle navigation">Selecciones</a>
                                         <ul class="sub-menu collapse national_menu" id="submenu-1-3">
                                             
                                         </ul>
@@ -274,11 +274,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="col-12 col-lg-8 offset-lg-2 d-none">
                             <img src="assets/images/banner/freeshippingbanner.png" alt="" style="width: 100%;border-radius: 10px;margin:30px 0px 10px 0px">
                         </div>
                         
-                        <p class="mt-10 category_title"></p>
+                        <p class="mt-10 category_title"><b style="font-size: 1.3em;"><img src="https://i.pinimg.com/originals/2e/ce/ce/2ececec5431d0a1b7eae4e1acac7c59f.gif" width="20"> Cargando datos</b></p>
                         <h2 class="mb-0 team_title"> </h2>
                         <div class="col-12 div-opt row"></div>
                         <div class="tab-content" id="nav-tabContent">
@@ -430,6 +430,24 @@
         <!-- End Footer Bottom -->
     </footer>
     <!--/ End Footer Area -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+            pageLanguage: 'en', // Idioma original de la página
+            includedLanguages: 'es', // Idiomas permitidos
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google-translate'); // Usar clase en vez de ID
+            const a=setInterval(() => {
+                if($(".skiptranslate").css("display")!="none"){
+                $(".skiptranslate").hide();
+                $("body").css("margin-top","0px")
+                $("body").css("top","0px")
+                clearInterval(a)
+                }
+            }, 200);
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
@@ -494,6 +512,7 @@
         let instance;
         function init(){
                 instance="sports";
+                $(".category_title").html('')
                 if(!sportUrl){return false;}
                 const sportChoose = sports.find(a => a.toLowerCase() === sportUrl) || null; // Usar null si no se encuentra
                 if(sportChoose){
@@ -516,7 +535,6 @@
                         }
                     }
                 }
-                
         }
 
         function selector(item){
@@ -533,7 +551,7 @@
                 $(".div-opt").append(`<div class='col-4 col-lg-2 col-md-3' style="padding:3px"><div class='col-12'  style="background:#FFF;border:1px solid #34343;padding:4px;boder-radius:10px;text-align:center"><a href="/products${link}"><div style="width:100%;height:45px;padding-top:5px"><img src="assets/images/logos/teams/${$(this).val()}.png" onError="$(this).attr('src','assets/images/logos/teams/base.png')" style="height:40px"></div>${$(this).text()}</a></div></div>`)
                 n++; valu=val;
             });
-            if(n>0){$(".div-opt").prepend(`<h5 style="margin:10px">Choose your favourite ${item=='sports'?'sport':item=='categories'?'category':'team'}:</h5>`)}
+            if(n>0){$(".div-opt").prepend(`<h5 style="margin:10px">Selecciona tu equipo preferido ${item=='sports'?'sport':item=='categories'?'category':'team'}:</h5>`)}
             
         }
             
@@ -618,13 +636,13 @@
                         <div class="product-image">
                             <img src="assets/images/products/${convertImgUrl(mainImg)}" alt="#" onError="errorImg($(this),'${mainImg}')" style="border-radius:5px">
                             <div class="button">
-                                <a href="/product/${s.code}" class="btn">Select options</a>
+                                <a href="/product/${s.code}" class="btn">Ver más</a>
                             </div>
                         </div>
                         <div class="product-info" style="${s.product.toLowerCase().indexOf('women')>-1?"background:#fcd7de":""}">
-                            <span class="category">${s.category}</span>
+                            <span class="category">${s.category=='Other teams'?'Otros equipos':s.category}</span>
                             <span class="category">${s.team}</span>
-                            <h4 class="title">
+                            <h4 class="title notranslate">
                                 <a href="/product/${s.code}">${s.product.toLowerCase().indexOf('women')>-1?"<img src='https://cdn-icons-png.flaticon.com/512/1313/1313986.png' style='width:15px'>":""}${s.product}</a>
                             </h4>
                             <span class="category">CODE: ${s.code}</span>
@@ -637,7 +655,7 @@
                                 <li><span>4.0 Review(s)</span></li>
                             </ul>
                             <div class="price">
-                                <span><img src="assets/images/basic/blackfriday.png" alt="" style="width: 40px;margin-right: 10px;"> u$d ${s.price}</span>
+                                <span><img src="assets/images/basic/blackfriday.png" alt="" style="width: 40px;margin-right: 10px;"> ARS ${s.price}</span>
                             </div>
                         </div>
                     </div>

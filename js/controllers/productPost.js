@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
         const limit = parseInt(qty, 10) || 10;
         const order = sortOrder === 'desc' ? -1 : 1;
 
-        const filter = {};
+        const filter = {status:status?status:true};
         //status?filter={status}:filter={status:true};
 
         // Simplificación del regex para hacerlo insensible a mayúsculas/minúsculas

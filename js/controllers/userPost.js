@@ -96,16 +96,48 @@ const userLogin=async(req,res)=>{
     }
 }
 
-const userPurchase=async(req,res)=>{
-    const {email}=req.body;
-    console.log(email)
+const userPurchase = async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
     try {
-        const purchases=await purchase.find({email});
-        return res.status(200).json(await jsonAnswer(200,null,`Login success: The user has been correctly loged in`,{purchases}));
+        const purchases = await purchase.find({ email, status: { $nin: ['created', 'cancelled'] }  }).sort({ updatedAt: -1 });
+        console.log(purchases.map(a => ({ u: a.updatedAt, c: a.status })));
+        return res.status(200).json(await jsonAnswer(200, null, `Login success: The user has been correctly logged in`, { purchases }));
     } catch (error) {
-        return res.status(200).json(await jsonAnswer(400,"The operation has failed","The email or password are incorrect.",null));
+        console.error(error);
+        return res.status(200).json(await jsonAnswer(400, "The operation has failed", "The email or password are incorrect.", null));
     }
-}
+};
+
+
+const userAllPurchase = async (req, res) => {
+    const { email } = req.body;
+    console.log(email);
+    try {
+        //{ status: { $nin: ['created', 'cancelled'] }  } poner dentro de find
+        const purchases = await purchase.aggregate([
+            { $match: {} },
+            { $sort: { updatedAt: -1 } },
+            {
+                $lookup: {
+                    from: "products", // Nombre de la colección de productos
+                    localField: "products.productId", // El campo dentro del array de productos
+                    foreignField: "_id", // El ID en la colección de productos
+                    as: "productDetails"
+                }
+            }
+        ]);
+        const purchaseSent=purchases.map(a=>{
+            const {__v,_id,...data}=a;
+            data.id=_id;
+            return data;
+        })
+        return res.status(200).json(await jsonAnswer(200, null, `Login success: The user has been correctly logged in`, { purchases:purchaseSent }));
+    } catch (error) {
+        console.error(error);
+        return res.status(200).json(await jsonAnswer(400, "The operation has failed", "The email or password are incorrect.", null));
+    }
+};
 
 const loginJWT=async(req,res)=>{
     const user=req.body.user_jwt;
@@ -211,5 +243,6 @@ module.exports={
     editApiToken,
     userSetPassword,
     sendMailPassword,
-    userPurchase
+    userPurchase,
+    userAllPurchase
 }

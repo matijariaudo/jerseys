@@ -3,7 +3,7 @@ const UserRouter=Router()
 require('dotenv').config()
 const session=require('express-session');
 const { passport, receiptTokens, loginTokensPassport } = require('../helpers/passport');
-const { userCreate, userLogin, userUpdate, loginJWT, loginJWTCheckemail, sendMailValidation, createApiToken, getApiToken, editApiToken, userSetPassword, sendMailPassword, userPurchase } = require('../controllers/userPost');
+const { userCreate, userLogin, userUpdate, loginJWT, loginJWTCheckemail, sendMailValidation, createApiToken, getApiToken, editApiToken, userSetPassword, sendMailPassword, userPurchase, userAllPurchase } = require('../controllers/userPost');
 const { checkUserCreate, checkUserLogin, checkUserUpdate, checkUserJWT, checkUserJWTEmail, checkUserUpdatePassword } = require('../helpers/validaciones');
 
 //Users administration
@@ -16,6 +16,8 @@ UserRouter.post('/users/sendpassword',sendMailPassword);
 UserRouter.post('/users/edit',checkUserUpdate,userUpdate);
 UserRouter.get( '/users/validar/:token',checkUserJWTEmail,loginJWTCheckemail);
 UserRouter.post('/users/purchases',checkUserJWT,userPurchase);
+
+UserRouter.post('/users/all/purchases',userAllPurchase);
 
 
 UserRouter.use(session({secret: process.env.SESSION_SEED,resave: false,saveUninitialized: false}))

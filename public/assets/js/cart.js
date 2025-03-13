@@ -24,6 +24,13 @@ function deleteProductCard(pos){
     searchProducts()
 }
 
+function deleteCart(){
+    localStorage.removeItem("cart");
+    localStorage.removeItem("cartCode");
+    localStorage.removeItem("cupon");
+    searchProducts()
+}
+
 
 function searchProducts(){
     cart=JSON.parse(localStorage.getItem("cart"));

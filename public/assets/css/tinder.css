@@ -1,0 +1,138 @@
+
+
+/* Resto de los estilos con .capa_2 como prefijo */
+
+.demo {
+  height:350px;
+  padding: 10px;
+  width: 100%;
+  margin: 0px;
+  background: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0);
+}
+.demo__content {
+  overflow: hidden;
+  position: relative;
+  height: 370px;
+  border: 1px solid none;
+  padding: 0px 10px;
+  background-color: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.demo__card-cont {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin: 0 auto 0rem;
+  background-color: none;
+  
+}
+.demo__card {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  height: 360px;
+  transform-origin: 50% 100%;
+  padding:10px
+}
+.demo__card__top {
+  height: 360px;
+  padding: 0px;
+  border-radius: 30px;
+  width: 100%;
+  background-color: none;
+}
+
+.demo__card__top-img{
+  border-radius: 30px;
+  -webkit-box-shadow: 2px 3px 18px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 3px 18px -10px rgba(0,0,0,0.75);
+box-shadow: 2px 3px 18px -10px rgba(0,0,0,0.75);
+width: 100%;height: 330px;border:3px solid #B9FF00
+}
+.demo__card.reset {
+  transition: transform 0.3s;
+  transform: translateX(0) !important;
+}
+.demo__card.reset .demo__card__choice {
+  transition: opacity 0.3s;
+  opacity: 0 !important;
+}
+.demo__card.inactive {
+  transition: transform 0.3s;
+}
+.demo__card.to-left {
+  transform: translateX(-30rem) rotate(-30deg) !important;
+}
+.demo__card.to-right {
+  transform: translate(30rem) rotate(30deg) !important;
+}
+.demo__card.below {
+  z-index: 1;
+}
+
+.demo__card__img {
+  overflow: hidden;
+  width: 10rem;
+  height: 400px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  border: 0.5rem solid #ffffff;
+  background-image: url("//s3-us-west-2.amazonaws.com/s.cdpn.io/142996/profile/profile-512_5.jpg");
+  background-size: cover;
+}
+.demo__card__name {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+.demo__card__btm {
+  height: 11.5rem;
+  background: #FFFFFF;
+}
+.demo__card__we {
+  text-align: center;
+  font-size: 2.2rem;
+  line-height: 11.5rem;
+}
+.demo__card__choice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.demo__card__choice.m--reject {
+  background: #000000bc;
+  border-radius: 30px;
+}
+.demo__card__choice.m--like {
+  background: #B9FF00bc;
+  height: 380px;
+  border-radius: 30px;
+}
+.demo__card__choice.m--like:after {
+  transform: scaleY(-1);
+}
+.demo__card__drag {
+  z-index: 5;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 380px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.demo__tip {
+  text-align: center;
+  font-size: 2.2rem;
+}

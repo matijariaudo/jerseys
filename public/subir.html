@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Navbar Responsive</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta name="theme-color" content="#212529"> <!-- Android Chrome -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"> <!-- iOS Safari -->
+    <script src="assets/js/ajax.js"></script>
+    <link rel="stylesheet" href="assets/css/tinder.css">
+    <script src="assets/js/tinder.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style>
+        @font-face {
+            font-family: 'MiFuente';
+            src: url('assets/fonts/logo.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .fuente-logo {
+            font-family: 'MiFuente', sans-serif;
+            text-align: center;
+        }
+        .menu{
+            border: 3px solid #B9FF00;
+            padding: 5px 0px;
+            border-width:10px 0px 0px 0px;
+        }
+        .cat{
+            background-color: rgb(255, 255, 255);
+            height: 50px;
+            border:1px solid rgb(240, 240, 240);
+            padding:10px 10px;
+            text-align: center;float: left;
+            border-radius: 10px;
+            margin-right: 5px;
+            -webkit-box-shadow: 2px 2px 4px 0px rgba(199,199,199,1);
+            -moz-box-shadow: 2px 2px 4px 0px rgba(199,199,199,1);
+            box-shadow: 2px 2px 4px 0px rgba(199,199,199,1);
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        #equipos{
+            overflow-y: hidden;
+        }
+        .img-mini{
+            border:1px solid #000;
+            margin-right: 15px;
+            border-radius: 10px;
+            width: 100px;
+        }
+        .img-show{
+            border:2px solid #000;
+            border-radius: 10px;
+        }
+        .lds-facebook {
+        /* change color here */
+        color: #B9FF00
+        }
+        .lds-facebook,
+        .lds-facebook div {
+        box-sizing: border-box;
+        }
+        .lds-facebook {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+        }
+        .lds-facebook div {
+        display: inline-block;
+        position: absolute;
+        left: 8px;
+        width: 16px;
+        background: currentColor;
+        animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        }
+        .lds-facebook div:nth-child(1) {
+        left: 8px;
+        animation-delay: -0.24s;
+        }
+        .lds-facebook div:nth-child(2) {
+        left: 32px;
+        animation-delay: -0.12s;
+        }
+        .lds-facebook div:nth-child(3) {
+        left: 56px;
+        animation-delay: 0s;
+        }
+        @keyframes lds-facebook {
+        0% {
+            top: 8px;
+            height: 64px;
+        }
+        50%, 100% {
+            top: 24px;
+            height: 32px;
+        }
+        }
+        
+    </style>
+</head>
+<body style="padding: 0px;margin: 0px;">
+
+    <!-- Navbar superior (visible en PC/Tablet) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="row m-0 p-0 col-12 col-lg-3 fuente-logo">
+                <div class="col-8 offset-2 col-lg-12 offset-lg-0 "><a class="navbar-brand" href="#" style="font-size: 1.8em;">Casacas<b style="color:#B9FF00">YA</b>.com</a></div>
+                <div class="col-2 d-block d-lg-none"><i class="bi bi-search" style="float: right;color:#FFF;font-size: 1.3em;margin-top: 4px;"></i></div>
+            </div>
+
+            <ul class="navbar-nav ms-auto d-none d-lg-flex fuente-logo">
+                <li class="nav-item" onclick="capa(1)"><a class="nav-link menu2 menu2_1" href="#"><i class="bi bi-journal-richtext"></i> Catálogo</a></li>
+                <li class="nav-item" onclick="capa(2)"><a class="nav-link menu2 menu2_2" href="#"><i class="bi bi-star"></i> Descubre</a></li>
+                <li class="nav-item" onclick="capa(3)"><a class="nav-link menu2 menu2_3" href="#"><i class="bi bi-heart"></i> Favoritos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Contenido de la página -->
+    <div class="container-fluid row capa capa_0" style="margin:0px;padding: 120px 0px 0px 0px;">
+        <div class="fuente-logo col-12 row p-10 m-0" style="text-align: center;">
+            <center><div class="lds-facebook"><div></div><div></div><div></div></div>
+            <h1 style="margin: 0px;">Cargando...</h1>
+            </center>
+        </div>
+    </div>
+    <!-- Contenido de la página -->
+    <div class="container-fluid row capa capa_1" style="margin: 0px;padding:20px 10px;">
+        <div class="fuente-logo col-12 col-lg-8 offset-lg-2">
+            <h1>Catálogo de Productos</h1> 
+            <div class="col-12 buscadorDivButton" style="display: none;">
+                <button class="btn btn-dark" onclick="$('.buscadorDivButton').hide();$('.buscadorDiv').show();limpiarCamisetas();">Volver a buscar</button>
+            </div>
+            <div class="col-12 buscadorDiv" style="background-color: #f7f7f700;border-radius: 20px;border:3px solid #cecece00;padding: 20px 10px;">
+                <div class="col-12 deportes_div p-0" >
+                    <h5 style="margin: 0px 0px 0px 10px;">Elegí un deporte</h5>
+                    <div class="col-12 p-0 m-0" style="overflow-y: auto;padding: 5px 5px 10px 5px">
+                        <div style="display: inline-flex;white-space: nowrap;padding: 10px;" id="deportes"></div>
+                    </div>
+                </div>
+                <div class="col-12 ligas_div p-0" style="display: none;">
+                    <h5 style="margin: 0px 0px 0px 10px;">Elegí una Liga</h5>
+                    <div class="col-12 p-0 m-0" style="overflow-y: auto;padding: 5px 5px 10px 5px">
+                        <div style="display: inline-flex;white-space: nowrap;padding: 10px;" id="ligas"></div>   
+                    </div>
+                </div>
+                <div class="col-12 equipos_div p-0" style="display: none;">
+                    <h5 style="margin: 0px 0px 0px 10px;">Elegí un equipo</h5>
+                    <div class="col-12 p-0 m-0" style="overflow-y: auto;padding: 5px 5px 10px 5px">
+                        <div style="display: inline-flex;white-space: nowrap;padding: 10px;" id="equipos"></div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="fuente-logo" id="teamBuscado" style="margin-top: 20px;text-align: center;"></h1>
+        <div class="col-12 row m-0" style="padding: 0px;padding-bottom: 140px;" id="products">
+            
+        </div>
+    </div>
+    <div class="container-fluid row capa capa_2" style="padding: 0px;padding-top: 20px;margin: 0px;">
+        <div class="col-12 col-lg-4 offset-lg-4  p-0 m-0 fuente-logo">
+            <h1 class="" style="text-align: center;margin:0px">Matchea con tu casaca!</h1>
+            <p style="color: rgb(96, 96, 96);font-size: .8em;text-align: center;margin:0px;padding: 0px 10px;">Desliza a la derecha si te gusta una casaca, a la izquierda si no. Luego, encontrarás las elegidas en <a onclick="capa(3)" style="background-color: #B9FF00;padding: 2px;cursor: pointer;">tus favoritos.</a></p>
+        </div>    
+        <div class="col-12 col-lg-4 offset-lg-4  p-0 m-0 imgCarga">
+            <center id="gifCarga" class="fuente-logo" style="margin-top: 20px;"><div class="lds-facebook"><div></div><div></div><div></div></div>
+                <h1 style="margin: 0px;">Cargando...</h1>
+            </center>
+        </div>    
+        <div class="col-12 col-lg-4 offset-lg-4  p-0 m-0  imgCargada" style="display: none;">
+            <div class="demo row  p-0 m-0">
+                <div class="demo__content">
+                    <div class="demo__card-cont">
+                    </div>
+                </div>
+                <div class="row m-0" style="padding: 0px;padding-top: 0px;">
+                    <div class="col-5 offset-1" style="text-align: center;padding: 2px;">
+                        <button id="btnUnLike" class="btn btn-dark w-100 fuente-logo" style="color:#B9FF00"><i class="bi bi-hand-thumbs-down"></i> No Me gusta</button>
+                    </div>
+                    <div class="col-5" style="text-align: center;padding: 2px;">
+                        <button id="btnLike" class="btn btn-light w-100 fuente-logo" style="background-color: #B9FF00;"><i class="bi bi-hand-thumbs-up"></i> Me gusta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid row capa capa_3" style="margin: 0px;padding:20px 10px 90px 10px;">
+        <div class="fuente-logo col-12 col-lg-8 offset-lg-2">
+            <h1>Productos Favoritos</h1> 
+            <button class="btn btn-light btnWhatsapp" onclick="$('#sendModal').modal('show');" style="background-color: #B9FF00;margin-bottom: 10px;">Envianos tus favoritos <img src="https://img.icons8.com/m_outlined/512/whatsapp.png" style="width: 25px;"></button>
+            <button class="btn btn-dark btnBorrarFav" onclick="$('#alertModal').modal('show');" style="color: #B9FF00;margin-top: 30x;"><i class="bi bi-trash"></i>  Vaciar favoritos</button>
+            <div class="favoritos_div row">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid row capa capa_4" style="margin: 0px;padding:20px 10px 100px 10px;">
+        <div class="fuente-logo col-12 col-lg-8 offset-lg-2">
+            <h1>Precio</h1> 
+            <div class="row" style="text-align: left;padding-bottom: 10px;">
+                <b style="color: #8ec102;">Futbol <a style="color: #222222;">$39.900</a></b>
+                <b style="color: #8ec102;">Futbol Retro (2 o + años) <a style="color: #222222;">$44.900</a></b>
+                <b style="color: #8ec102;">Basketball <a style="color: #222222;">$45.900</a></b>
+                <p style="font-family: Arial, Helvetica, sans-serif;font-size: .8em;color: rgb(202, 202, 202);margin-top: 10px;">*Al llegar al país aduanas le exigirá un pago de aproximadamente 3.000 ARS por unidad comprada (Declarando 15usd / Unidad)</p>
+            </div>
+            <h1>Producto / Talle</h1> 
+            <div class="row" style="text-align: left;">
+                <b style="color: #8ec102;">¿Cómo son los talles de las camisetas?</b>
+                <p>Los talles suelen ser más pequeños que los estándares locales.</p>
+
+                <b style="color: #8ec102;">¿Qué talle debo elegir?</b>
+                <p>Recomendamos pedir una talla más grande de la que usa habitualmente. Por ejemplo, si normalmente usa XL, le sugerimos pedir XXL.</p>
+            
+                <b style="color: #8ec102;">¿Las camisetas son originales?</b>
+                <p>No, son réplicas de altísima calidad fabricadas e importadas desde el sudeste asiático.</p>
+            </div>
+            <h1>Entrega</h1> 
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="pagoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content fuente-logo" style="height: auto;background-color: #FFF;">
+            <div class="modal-header" style="border: 0px;">
+              <h5 class="modal-title" id="pagoModalLabel"><img src="https://img.icons8.com/m_outlined/512/whatsapp.png" alt="" style="width: 30px;"> whatsapp</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body fuente-logo">
+              <p>Selecciona tu vendedor de confianza para enviarle tus casacas favoritas.</p>
+              <select name="" id="seller" style="background: rgba(0, 0, 0);color:#FFF;border: 2px solid black;border-width: 0px 0px 2px 0px;">
+                <option value="+5493406460886">Emmanuel Diechut (San Jorge)</option>
+              </select>
+              <button class="btn btn-light" onclick="enviarFavoritos()" style="background-color: #B9FF00;margin-top: 20px;">Envía un whatsapp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="pagoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content fuente-logo">
+            <div class="modal-header" style="border: 0px;">
+              <h5 class="modal-title" id="pagoModalLabel">Producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <h1 class="fuente-logo" id="productModal_title"></h1>
+              <img src="" alt="" id="productModal_mainImg" style="width: 100%;" class="img-show">
+              <div class="col-12" style="overflow-y: auto;">
+                <div style="display: inline-flex;white-space: nowrap;padding: 10px 0px;" id="productModal_images">
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="pagoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content fuente-logo" style="height: auto;">
+            <div class="modal-header" style="border: 0px;">
+                <h5 class="modal-title" id="pagoModalLabel">Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                Estás seguro de borrar todos tus favoritos?
+            </div>
+            <div class="modal-footer" style="border: 0px;">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="background-color: #FFF;margin-right: 7%;">No, mantener</button>
+                <button type="button" class="btn btn-light" onclick="deleteAllFav()" data-bs-dismiss="modal" style="background-color: #FFF;margin-right: 12%;">Si, Borrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Navbar inferior (visible en móvil) -->
+    <nav class="navbar fixed-bottom  fuente-logo d-lg-none p-0 capa capa_1 capa_2 capa_3 capa_4">
+        
+        <div class="container-fluid bg-dark d-flex justify-content-around p-0">
+            <div class="col" onclick="capa(1)"><a class="nav-link text-center menu menu_1" href="#"><i class="bi bi-journal-richtext"></i><br>Catálogo</a></div>
+            <div class="col" onclick="capa(2)"><a class="nav-link text-center menu menu_2" href="#"><i class="bi bi-star"></i><br>Descubre</a></div>
+            <div class="col" onclick="capa(4)"><a class="nav-link text-center menu menu_4" href="#"><i class="bi bi-file-earmark-text"></i><br>Info</a></div>
+            <div class="col" onclick="capa(3)"><a class="nav-link text-center menu menu_3" href="#"><i class="bi bi-heart"></i> <b class="favoritos_nro"></b><br>Favoritos</a></div>
+            <div class="col-12" style="background-color: #B9FF00;font-size: .7em;padding: 4px 2px;">Vendé en tu ciudad <i class="bi bi-arrow-right"></i> <b style="background-color: #000;color:#B9FF00;padding:2px">CLICK ACÁ</b></div>
+        </div>
+    </nav>
+
+    <!-- Iconos de Bootstrap -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+        capa(1)
+        var img=[];
+        //img=["assets/images/products/05941188-9e2acfdc-small.jpg","assets/images/products/05941188-961c2c62-small.jpg","assets/images/products/05941188-a08e3d6e-small.jpg"]
+        
+        
+
+
+        s=0;
+        const next=() => {
+            $(".demo").hide()
+            if(s>(img.length-1)){addCardsFromBD();return true;}
+            $(".demo__card-cont").html("")
+            crearCard(img[s].img,img[s].code);
+            $(".demo").show()
+            s++;
+        }
+        CardInit(next,onMatch);
+        var randomBase=1000;
+        var productsDataMatch=[]
+        addCardsFromBD();
+
+        function onMatch(e){
+            admFav(e,true);
+        }
+
+        function addCardsFromBD(){
+            console.log("Buscando tarjetas")
+            qtyReg=1;
+            pag=getRandomInt(randomBase);
+            ajax('/api/products',{qty:qtyReg,init:(qtyReg*(parseInt(pag)-1))},(e)=>{
+                products=e.data.products;
+                productsDataMatch=products;
+                isProduct=false;
+                randomBase=e.data.totalRecords/qtyReg;
+                products.forEach(s => {
+                    imgMainProduct=s.images.find(a=>a.isMain)?.link;
+                    if(!imgMainProduct){return true;}
+                    img.push({img:imgMainProduct,code:s.code})
+                    isProduct=true;
+                });
+                isProduct?next():addCardsFromBD()
+            })
+        }
+
+         // Reemplaza con la URL de tu sonido
+        
+        
+
+
+        function crearCard(idImg,id){
+            $('.imgCargada').hide();$('.imgCarga').show()
+            html=`
+            <div class="demo__card" id="${id}">
+                    <div class="demo__card__top">
+                      <img class="demo__card__top-img" src="assets/images/products/${convertImgUrl(idImg)}" onError="errorImg($(this),'${idImg}')" alt="#" onload="$('.imgCargada').show();$('.imgCarga').hide()">
+                    </div>
+                    <div class="demo__card__choice m--reject">
+                      <div style="width: 80%;height: 50%;background-color: none;margin-top: 100px;margin-left: 10%;margin-top: 25%;text-align: center;color:#B9FF00">
+                          <i class="bi bi-hand-thumbs-down" style="font-size:4em"></i><br>
+                          <p style="font-size:1.8em;margin: 0px" class="fuente-logo">No te gusta!</p>
+                      </div>
+                    </div>
+                    <div class="demo__card__choice m--like">
+                      <div style="width: 80%;height: 50%;background-color: none;margin-top: 100px;margin-left: 10%;margin-top: 25%;text-align: center;color:#000">
+                          <i class="bi bi-hand-thumbs-up" style="font-size:4em"></i><br>
+                          <p style="font-size:1.8em;margin: 0px"  class="fuente-logo">Te gusta!</p>
+                      </div>
+                    </div>
+                    <div class="demo__card__drag"></div>
+                  </div>`;
+            $(".demo__card-cont").append(html)      
+        }
+
+
+        capa(0)
+        ajax('/api/categories',{},(e)=>{
+            console.log(e.data)
+            const {sports,categories,teams}=e.data;
+            capa(1)
+            printCategories(sports,categories,teams);
+        })
+
+        const printCategories=(sports,categories,teams)=>{
+            sports.forEach(s => {
+                html=`
+                <div class="cat deportes" onclick="$('.deportes').css('background','#FFF');$(this).css('background','#B9FF00');$('.ligas').hide();$('.liga_${s.replaceAll(' ','').toLowerCase()}').show();$('.ligas_div').show();$('.equipos_div').hide();$('.ligas').css('background','#FFF');limpiarCamisetas()">
+                    <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px"> ${traducir(s)}
+                </div>
+                `;
+                $("#deportes").append(html)
+            });
+            
+            Object.keys(categories).forEach((s,i) => {
+                html=`
+                <div class="cat ligas liga_${categories[s].replaceAll(' ','').toLowerCase()}" onclick="$('.ligas').css('background','#FFF');$(this).css('background','#B9FF00');$('.equipos').hide();$('.equipo_${s.replaceAll(' ','').toLowerCase()}').show();$('.equipos_div').show();$('.equipos').css('background','#FFF');limpiarCamisetas()">
+                    <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px"> ${traducir(s)}
+                </div>
+                `;
+                $("#ligas").append(html)
+            });
+            
+            
+            Object.keys(teams).forEach(s => {
+                html=`
+                <div class="cat equipos equipo_${teams[s].replaceAll(' ','').toLowerCase()}" onclick="$('.equipos').css('background','#FFF');$(this).css('background','#B9FF00');buscarCamisetas('${s}')">
+                    <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px" onError="$(this).hide()"> ${s}
+                </div>
+                `;
+                $("#equipos").append(html)
+            });
+        }
+
+        function limpiarCamisetas(){
+            $('#products').html('');
+            $("#teamBuscado").html('');
+        }
+
+        var productsData=[]
+        function buscarCamisetas(team){
+            $('.buscadorDivButton').show();
+            $(".buscadorDiv").hide()
+            $("#products").html(`
+            <center><div class="lds-facebook"><div></div><div></div><div></div></div>
+            <h1 class="fuente-logo" style="margin: 0px;">Cargando...</h1>
+            </center>`)
+            $("#teamBuscado").html(`<img src="assets/images/logos/teams/${team.replaceAll(' ','').toLowerCase()}.png" style="height:30px" onError="$(this).hide()"> ${team}`)
+            teamBuscar=team.toLowerCase().replaceAll(" ","")
+            ajax('/api/products',{qty:1000,team:teamBuscar},(e)=>{
+                products=e.data.products;
+                productsData=products;
+                $("#products").html("")
+                products.forEach(s => {
+                    productsPrint(s)
+                    //console.log(imgMainProduct)
+                    //img.push({img:imgMainProduct,code:s.code})
+                    //crearCard(s.mainImg,s.code)
+                });
+                console.log(s);
+                //asignarLikeButton()
+                next()
+            })
+        }
+
+        const favGuardados=localStorage.getItem("favoritos");
+        var favoritos=JSON.parse(favGuardados)||[];
+        showFav();
+        function showFav(){
+            $(".favoritos_div").html("")
+            favoritos.forEach(e=> {
+                imgMainProduct=e.images.find(a=>a.isMain)?.link || "";
+                dat=e;
+                dat.product.replaceAll(" ","").toLowerCase().indexOf('women')<0?women=false:women=true;
+                $(".favoritos_div").append(`
+                <div class="col-6 col-md-4 col-lg-3 p-2">
+                <div class="card border-0 shadow-sm" style="${women?"background:#ffc2da;":""}">
+                    <img src="assets/images/products/${convertImgUrl(imgMainProduct)}" onError="errorImg($(this),'${imgMainProduct}')" class="card-img-top" alt="Producto">
+                    <div class="card-body text-center" style="padding:2px 2px 10px 2px">
+                        <p style="margin:0px 0px 10px 0px">Código: <b style="background:#B9FF00;padding:2px">${dat.code}</b></p>  
+                        <h6 class="card-title fuente-logo"  style="margin:0px;min-height:50px">${dat.product}</h6>
+                        <button onclick="showProduct('${dat.code}','favoritos')" class="btn btn-light fuente-logo" style="background:#B9FF00;border:1px solid #000">Ver mas</button>
+                        <button class="btn btn-dark" onclick="admFav('${dat.code}')"  style="margin-left:4px;border:1px solid #000;color:#B9FF00">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                </div`)
+            });
+            if(favoritos.length<1){
+                $(".favoritos_div").html(`<p style="text-align:center">Aún no elegiste tus casacas favoritas..</p>
+                <button class="btn btn-light" onclick="capa(1)" style="background-color: #B9FF00;">Ir a catálogo</button>`);
+                $(".btnWhatsapp").hide();
+                $(".btnBorrarFav").hide();
+            }else{
+                $(".btnWhatsapp").show()
+                $(".btnBorrarFav").show();
+            }
+            $(".favoritos_nro").html(favoritos.length>0?favoritos.length:"")
+        }
+
+        function favAnimation(){
+            paso=300
+            $(".menu_3").css('background',"#80b000").css('color',"#000");
+            setTimeout(() => {$(".menu_3").css('background',"none").css('color',"#FFF");}, paso);
+            setTimeout(() => {$(".menu_3").css('background',"#80b000").css('color',"#000");}, paso*2);
+            setTimeout(() => {$(".menu_3").css('background',"none").css('color',"#FFF");}, paso*3);
+        }
+
+        function buttonFav(btn,code){
+            if(btn.find('i').eq(0).css("color")=="rgb(110, 110, 110)"){
+                //btn.find('i').eq(0).css("color","#8dc200");
+                admFav(code,true);
+            }else{
+                //btn.find('i').eq(0).css("color","rgb(110, 110, 110)")
+                admFav(code,false);
+            }
+        }
+
+        function admFav(code,add){
+            favoritos=add?agregarPorCodigo(code):eliminarPorCodigo(code);
+            localStorage.setItem("favoritos",JSON.stringify(favoritos));
+            showFav();
+            $(".buttonFav").each(function () { 
+                code=$(this).attr("data");
+                favoritos.find(a=>a.code==code)?$(this).find('i').eq(0).css("color","#8dc200"):$(this).find('i').eq(0).css("color","rgb(110, 110, 110)")
+            })
+        }
+
+        function deleteAllFav(){
+            localStorage.removeItem("favoritos");
+            favoritos=[];
+            showFav();
+            $(".buttonFav").each(function () { 
+                code=$(this).attr("data");
+                favoritos.find(a=>a.code==code)?$(this).find('i').eq(0).css("color","#8dc200"):$(this).find('i').eq(0).css("color","rgb(110, 110, 110)")
+            })
+        }
+
+        function agregarPorCodigo(code) {
+            var obj;
+            favAnimation();
+            obj=productsData.find(a=>a.code==code);
+            //Si no encuentra el code debo hacer que lo busque en la data del tinder
+            if(!obj){obj=productsDataMatch.find(a=>a.code==code);}
+            const arr=favoritos;
+            if (!arr.some(item => item.code === obj.code)) {
+                arr.push(obj);
+            }
+            return arr;
+        }
+
+        function eliminarPorCodigo(code) {
+            const arr=favoritos;
+            console.log("elimina",arr.filter(item => item.code !== code))
+            return arr.filter(item => item.code !== code);
+        }
+
+        function enviarFavoritos() {
+            sellerNro=$("#enviarFavoritos").val();
+            text=`Hola, estoy interesado en los siguientes productos:\n`
+            favoritos.forEach((e,i) => {
+                text+=`${i+1}- ${e.product} *Cod: ${e.code}*\n`
+            });
+            console.log(text);
+            console.log(sellerNro)
+            enviarWSP(sellerNro,text);
+        }
+        function enviarWSP(numero="+5493406460886", mensaje) {
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, "_blank");
+        }
+           
+
+        function productsPrint(dat){
+            imgMainProduct=dat.images.find(a=>a.isMain)?.link || "";
+            favoritos.find(a=>a.code==dat.code)?isFav=true:isFav=false;
+            dat.product.replaceAll(" ","").toLowerCase().indexOf('women')<0?women=false:women=true;
+            html=`
+            <div class="col-6 col-md-4 col-lg-3 p-2">
+                <div class="card border-0 shadow-sm" style="${women?"background:#ffc2da;":""}">
+                    <img src="assets/images/products/${convertImgUrl(dat.mainImg)}" onError="errorImg($(this),'${imgMainProduct}')" class="card-img-top" alt="Producto">
+                    <div class="card-body text-center fuente-logo" style="padding:2px 2px 10px 2px">
+                        <p style="margin:0px 0px 10px 0px">Código: <b style="background:#B9FF00;padding:2px">${dat.code}</b></p>  
+                        <h6 class="card-title " style="min-height:50px">${dat.product}</h6>
+                        <p class="text-muted mb-1 fuente-logo d-none">AR$ ${dat.price}</p>
+                        <button onclick="showProduct('${dat.code}','product')" class="btn btn-light fuente-logo" style="background:#B9FF00;border:1px solid #000">Ver mas</button>
+                        <button class="btn btn-light buttonFav" onclick="buttonFav($(this),'${dat.code}')" data="${dat.code}" style="margin-left:4px;border:1px solid #000">
+                            <i class="bi bi-suit-heart-fill" style="color:${isFav?"#B9FF00":"#6e6e6e"}"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>`
+            $("#products").append(html)
+        }
+
+        function showProduct(code,type='product'){
+            var product;    
+            if(type=='product'){
+            product=productsData.find(a=>a.code===code);
+            }else{
+            product=favoritos.find(a=>a.code===code);    
+            }
+            console.log(product)
+            $("#productModal").modal('show');
+            $("#productModal_title").html(product.product)
+            mainImg=product.images.find(a=>a.isMain)?.link||'';
+            $("#productModal_mainImg").on("error",function(){errorImg($(this),mainImg)});
+            $("#productModal_mainImg").attr("src",`assets/images/products/${convertImgUrl(mainImg)}`);
+            $("#productModal_images").html("")
+            product.images.forEach(e => {
+                console.log(e)
+                $("#productModal_images").append(`<img onclick="$('#productModal_mainImg').attr('src',$(this).attr('src'))" src="assets/images/products/${convertImgUrl(e.link)}" onError="errorImg($(this),'${e.link}')"  class="img-mini">`)
+            });
+        }
+        
+        const traducciones={
+            soccer:"Fútbol",
+            basketball:"Basquet",
+            "german teams":"Bundesliga (Alemania)",
+            "italian teams": "Calcio (Italia)",
+            "spanish teams": "La Liga (España)",
+            "other teams":"Resto del mundo",
+            "english teams":"Premier Ligue (Inglaterra)",
+            "french teams":"Ligue 1 (Francia)",
+            "national teams": "Selecciones"
+        }
+        function traducir(txt){
+            palabra=txt.toLowerCase();
+            return traducciones[palabra]?traducciones[palabra]:txt
+        }
+    </script>
+</body>
+</html>

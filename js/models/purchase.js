@@ -2,11 +2,14 @@ const {Schema,model} = require('mongoose');
 const mongoose = require('mongoose');
 
 const paymentSchema=Schema({
-    paypalId:{type:String},
+    paypalId:{type:String,default:'-'},
     amount:{type:Number},
-    currency:{type:String},
-    paypalFee:{type:Number},
-    netAmount:{type:Number}
+    currency:{type:String,default:"ARS"},
+    fee:{type:Number,default:0},
+    netAmount:{type:Number},
+    document:{type:String},
+    verified:{type:Boolean, default:false},
+    type:{type:String,enum:['paypal','mercadoPago','bankTransfer']}
 })
 
 const purchaseSchema = new Schema({
@@ -31,9 +34,10 @@ const purchaseSchema = new Schema({
     discount:{type:Number},
     finalAmount:{type:Number},
     totalAmount: { type: Number, required: true , default: 1000},
-    status: { type: String, default: 'created', enum: ['created','pending', 'completed', 'canceled'] },
+    status: { type: String, default: 'created', enum: ['created','cancelled','inProcess', 'completed', 'cancelled'] },
     purchaseDate: { type: Date, default: Date.now },
-    payment:paymentSchema
+    payment:paymentSchema,
+    notes:[{type:String}]
 }, { timestamps: true });
 
 //quita el password de la rta

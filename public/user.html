@@ -78,10 +78,10 @@
                             </div>
                             <ul class="user-login no_user">
                                 <li>
-                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i>  Log In</a>
+                                    <a href="/login"><i class="lni lni-user" style="color:#FFF"></i>  Inicia sesión</a>
                                 </li>
                                 <li>
-                                    <a href="/register">Create account</a>
+                                    <a href="/register">Creá tu cuenta</a>
                                 </li>
                             </ul>
                         </div>
@@ -97,7 +97,7 @@
                     <div class="col-lg-3 col-md-3 col-7 p-3 p-md-1 order-1">
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="/">
-                            <img src="assets/images/logos/logo.png" alt="Logo" style="width: 150px;">
+                            <img src="assets/images/logos/logocasaca.png" alt="Logo" style="width: 230px;">
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -107,7 +107,7 @@
                             <!-- navbar search start -->
                             <div class="navbar-search search-style-5">
                             <div class="search-input">
-                                    <input type="text" id="seach-input" placeholder="Search your team" autocomplete="off">
+                                    <input type="text" id="seach-input" placeholder="Buscá tu equipo" autocomplete="off">
                                     <div id="seach-div" class="list-group position-absolute w-100 " style="z-index: 99999;"> 
 
                                       </div>
@@ -141,7 +141,7 @@
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
                                             <span><ff class="shopping-qty"></ff> Items</span>
-                                            <a href="/cart">View Cart</a>
+                                            <a href="/cart">Ver carrito</a>
                                         </div>
                                         <ul class="shopping-list">
                                             
@@ -152,7 +152,7 @@
                                                 <span class="total-amount">$<ff class="shopping-total-amount"></ff></span>
                                             </div>
                                             <div class="button">
-                                                <a href="/checkout" class="btn animate">Checkout</a>
+                                                <a href="/checkout" class="btn animate">Finalizar compra</a>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                             data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">Club Teams</a>
+                                            aria-expanded="false" aria-label="Toggle navigation">Clubes de futbol</a>
                                         <ul class="sub-menu collapse club_menu" id="submenu-1-2">
                                             <li class="nav-item"><a href="about-us.html">All</a></li>
                                         </ul>
@@ -196,7 +196,7 @@
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                             data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">National Teams</a>
+                                            aria-expanded="false" aria-label="Toggle navigation">Selecciones</a>
                                         <ul class="sub-menu collapse national_menu" id="submenu-1-3">
                                             
                                         </ul>
@@ -658,11 +658,10 @@
                 purchases.forEach(p => {
                     $(".orders").append(`
                     <div class="col-12" style="background:rgb(0,0,0,.03);padding:10px;border-radius:10px;margin-bottom:10px">
-                        <p><i class="lni lni-calendar"></i> ${formatearFecha(p.purchaseDate)}</p>
-                        <p><i class="lni lni-user"></i>  ${p.name}</p>
-                        <p><i class="lni lni-location-arrow-right"></i> ${p.address}, ${p.city}, ${p.state}, ${p.country} - Post Code: ${p.postCode}</p>
-                        <p>Products: ${p.products.length}</p>
-                        <p>Status: ${p.status}</p>
+                        <p style="float:right">${p.status=='inProcess'?'En proceso':''}</p>
+                        <p><i class="lni lni-calendar"></i> ${formatearFecha(p.updatedAt)}</p>
+                        <p style="font-size:.8em;font-style: italic;"><i class="lni lni-user"></i>  ${p.name} - <i class="lni lni-location-arrow-right"></i>${p.address}, ${p.city}, ${p.state}, ${p.country} - Post Code: ${p.postCode}</p>
+                        ${p.payment?`${p.payment.type?(p.payment.type=='bankTransfer'?'Transferencia Bancaria':'Mercado Pago'):'Paypal'}: <b>${p.payment.currency} ${p.payment.amount}</b> ${p.payment.type=='bankTransfer'?p.payment.verified?'Verificado':'<br><b style="color:#a04646;font-size:.7em">NOTA: Transferencia Bancaria pendiente de verificación</b>':''}`:'<b style="color:red">Pago pendiente</b>'}
                     </div>
                     `)
                 });

@@ -84,6 +84,21 @@ const purchaseCreate=async(req,res)=>{
     }
 }
 
+const purchaseChangeStatus=async (req,res)=>{
+    try {
+        const {purchaseId,newStatus}=req.body;
+        const purchase=await Purchase.findById(purchaseId);
+        purchase.status=newStatus;
+        purchase.save();
+        return res.status(200).json(await jsonAnswer(200,'The purchase status has been changed',{purchase}));
+    } catch (error) {
+        return res.status(400).json(await jsonAnswer(400,"The operation has failed","Your chat has not correctly found.",{error:error.message}));
+    }
+}
+
+
+
 module.exports={
-    purchaseCreate
+    purchaseCreate,
+    purchaseChangeStatus
 }

@@ -11,6 +11,7 @@ const { Purchase } = require('./js/models');
 const { createProducts } = require('./add');
 const { sendEmail } = require('./js/helpers/sendEmail');
 const PaymenteRouter = require('./js/routers/paymentRouters');
+const IpRouter = require('./js/routers/ipRouters');
 
 require('dotenv').config();
 
@@ -114,14 +115,17 @@ app.get('/sitemap', async(req, res) => {return res.sendFile(path.join(__dirname,
 app.get('/sitemap.xml', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'sitemap.xml'))});
 app.get('/robots.txt', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'robots.txt'))});
 
-app.use('/api',UserRouter)
-app.use('/api',ProductRouter)
-app.use('/api',PurchaseRouter)
+app.use('/api',UserRouter);
+app.use('/api',IpRouter);
+app.use('/api',ProductRouter);
+app.use('/api',PurchaseRouter);
 app.get('/api/production', (req, res) => {
   isProduction=process.env.ISPRODUCTION 
   res.status(200).json({ isProduction });
 });
 app.use('/api',PaymenteRouter);
+app.get('/editimg', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'editImg.html'))});
+app.get('/subir', async(req, res) => {return res.sendFile(path.join(__dirname,'public', 'subir.html'))});
 app.get('/register', async(req, res) => {res.cookie('action', "register");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
 app.get('/login', async(req, res) => {res.cookie('action', "login");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
 app.get('/user', async(req, res) => {res.cookie('action', "user");return res.sendFile(path.join(__dirname,'public', 'user.html'))});
@@ -153,7 +157,8 @@ app.get('/products/:sport/:category/:team', async(req, res) => {
 });
 
 app.get('*', async(req, res) => {
-  return res.sendFile(path.join(__dirname,'public', 'index.html'))
+  //return res.sendFile(path.join(__dirname,'public', 'index.html'))
+  return res.sendFile(path.join(__dirname,'public', 'subir.html'))
 });
 
 
