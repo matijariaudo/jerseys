@@ -167,12 +167,16 @@ const createProduct=async(req,res)=>{
 }
 
 const productImage=async (req, res) => {
+    console.log("AAa")
     const imageUrl = req.query.url; // Recibir la URL como parámetro de consulta
+    console.log("AAa",imageUrl)
     try {
-      // Descargar la imagen
-      const filePath = await downloadImage(imageUrl);
-      // Enviar la imagen como respuesta al usuario
-      res.sendFile(path.resolve(filePath));
+        console.log("Descargando imagen de:", imageUrl);
+        const filePath = await downloadImage(imageUrl);
+        console.log("Imagen guardada en:", filePath);
+        res.sendFile(path.resolve(filePath), (err) => {
+        if (err) console.error("Error al enviar archivo:", err);
+        });
     } catch (error) {
       res.status(500).send('Error al descargar la imagen.');
     }
