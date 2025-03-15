@@ -58,6 +58,10 @@ function convertImgUrl1(url){
     return fileName;
 }
 
+function replaceLastPartWithMedium(url) {
+    return url.replace(/\/[^\/]+$/, '/medium.jpeg');
+}
+
 function errorImg(e,url){
     if(e.attr("src").indexOf("assets")>-1){
         console.log("probando server",e.attr('id'),`/api/products/image?url=${url}`);

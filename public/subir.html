@@ -366,7 +366,7 @@
             html=`
             <div class="demo__card" id="${id}">
                     <div class="demo__card__top">
-                      <img class="demo__card__top-img" src="assets/images/products/${convertImgUrl(idImg)}" onError="errorImg($(this),'${idImg}')" alt="#" onload="$('.imgCargada').show();$('.imgCarga').hide()">
+                      <img class="demo__card__top-img" src="https://margen.site/s3?url=${idImg}" onError="errorImg($(this),'${idImg}')" alt="#" onload="$('.imgCargada').show();$('.imgCarga').hide()">
                     </div>
                     <div class="demo__card__choice m--reject">
                       <div style="width: 80%;height: 50%;background-color: none;margin-top: 100px;margin-left: 10%;margin-top: 25%;text-align: center;color:#B9FF00">
@@ -463,13 +463,13 @@
         function showFav(){
             $(".favoritos_div").html("")
             favoritos.forEach(e=> {
-                imgMainProduct=e.images.find(a=>a.isMain)?.link || "";
+                imgMainProduct=e.mainImg.replaceAll('small','medium');
                 dat=e;
                 dat.product.replaceAll(" ","").toLowerCase().indexOf('women')<0?women=false:women=true;
                 $(".favoritos_div").append(`
                 <div class="col-6 col-md-4 col-lg-3 p-2">
                 <div class="card border-0 shadow-sm" style="${women?"background:#ffc2da;":""}">
-                    <img src="assets/images/products/${convertImgUrl(imgMainProduct)}" onError="errorImg($(this),'${imgMainProduct}')" class="card-img-top" alt="Producto">
+                    <img src="https://margen.site/s3?url=${imgMainProduct}" class="card-img-top" alt="Producto">
                     <div class="card-body text-center" style="padding:2px 2px 10px 2px">
                         <p style="margin:0px 0px 10px 0px">Código: <b style="background:#B9FF00;padding:2px">${dat.code}</b></p>  
                         <h6 class="card-title fuente-logo"  style="margin:0px;min-height:50px">${dat.product}</h6>
@@ -570,15 +570,15 @@
             imgMainProduct=dat.images.find(a=>a.isMain)?.link || "";
             favoritos.find(a=>a.code==dat.code)?isFav=true:isFav=false;
             dat.product.replaceAll(" ","").toLowerCase().indexOf('women')<0?women=false:women=true;
-            imgUrl=dat.mainImg.replaceAll('small','medium');
+            imgUrl=replaceLastPartWithMedium(dat.mainImg);
             html=`
             <div class="col-6 col-md-4 col-lg-3 p-2">
                 <div class="card border-0 shadow-sm" style="${women?"background:#ffc2da;":""}">
-                    <img src="assets/images/products/${convertImgUrl(imgUrl)}" id="img_${dat.code}" onError="errorImg($(this),'${imgUrl}')" class="card-img-top" alt="Producto">
+                    <img src="https://margen.site/s3?url=${imgUrl}" id="img_${dat.code}" class="card-img-top" alt="Producto">
                     <div class="card-body text-center fuente-logo" style="padding:2px 2px 10px 2px">
                         <p style="margin:0px 0px 10px 0px">Código: <b style="background:#B9FF00;padding:2px">${dat.code}</b></p>  
                         <h6 class="card-title " style="min-height:50px">${dat.product}</h6>
-                        <p class="text-muted mb-1 fuente-logo d-none">AR$ ${dat.price}</p>
+                        <p class="text-muted mb-1 fuente-logo ">AR$ ${dat.price}</p>
                         <button onclick="showProduct('${dat.code}','product')" class="btn btn-light fuente-logo" style="background:#B9FF00;border:1px solid #000">Ver mas</button>
                         <button class="btn btn-light buttonFav" onclick="buttonFav($(this),'${dat.code}')" data="${dat.code}" style="margin-left:4px;border:1px solid #000">
                             <i class="bi bi-suit-heart-fill" style="color:${isFav?"#B9FF00":"#6e6e6e"}"></i>
@@ -599,14 +599,13 @@
             console.log(product)
             $("#productModal").modal('show');
             $("#productModal_title").html(product.product)
-            mainImg=product.mainImg.replaceAll('small','medium');
-            console.log(mainImg,"MAINNN")
-            $("#productModal_mainImg").on("error",function(){errorImg($(this),mainImg)});
-            $("#productModal_mainImg").attr("src",`assets/images/products/${convertImgUrl(mainImg)}`);
+            mainImg=product.mainImg;
+            console.log(replaceLastPartWithMedium(mainImg),"MAINNN")
+            $("#productModal_mainImg").attr("src",`https://margen.site/s3?url=${replaceLastPartWithMedium(mainImg)}`);
             $("#productModal_images").html("")
             product.images.forEach(e => {
                 console.log(e)
-                $("#productModal_images").append(`<img onclick="$('#productModal_mainImg').attr('src',$(this).attr('src'))" src="assets/images/products/${convertImgUrl(e.link)}" onError="errorImg($(this),'${e.link}')"  class="img-mini">`)
+                $("#productModal_images").append(`<img onclick="$('#productModal_mainImg').attr('src',$(this).attr('src'))" src="https://margen.site/s3?url=${replaceLastPartWithMedium(e.link)}"  class="img-mini">`)
             });
         }
         
