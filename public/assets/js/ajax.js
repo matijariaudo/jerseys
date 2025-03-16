@@ -64,12 +64,9 @@ function replaceLastPartWithMedium(url) {
 
 function errorImg(e,url){
     if(e.attr("src").indexOf("assets")>-1){
-        console.log("probando server",e.attr('id'),`/api/products/image?url=${url}`);
-        e.attr("src",`/api/products/image?url=${url}`);
+        e.attr("src",`https://margen.site/s3?url=${url}&id=tryAgain`);
     }else{
-        console.log("error",e.attr('id'));
         e.attr("src",'assets/images/basic/error.png')
-        //e.attr("src",`/api/products/image?url=${url}`);
     }
 }
 
