@@ -3,6 +3,7 @@ const { downloadImage } = require("../helpers/downloadPictures");
 const { Product, Cupon } = require("../models");
 const fs = require('fs');
 const path = require('path');
+const product = require("../models/product");
 
 
 const getProducts = async (req, res) => {
@@ -46,7 +47,8 @@ const getProducts = async (req, res) => {
 
 
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    string=string.toLowerCase();
+    return (string.charAt(0).toUpperCase() + string.slice(1)).trim() || 'NA';
   }
 
 const getCategories = async (req, res) => {
@@ -60,33 +62,30 @@ const getCategories = async (req, res) => {
             categories: {},
             teams: {}
         };
-
+        
         // Recorrer cada producto y organizar los datos en la estructura deseada
-        products.forEach(product => {
-            const { sport:sport1, category:category1, team:team1 } = product;
-            const sport=capitalizeFirstLetter(sport1.toLowerCase());
-            const category=capitalizeFirstLetter(category1.toLowerCase());
-            const team=capitalizeFirstLetter(team1.toLowerCase());
+        const NewCategories = products.reduce((a, b) => {
+            const sport = capitalizeFirstLetter(b.sport).trim();
+            const category = capitalizeFirstLetter(b.category).trim();
+            const team = capitalizeFirstLetter(b.team).trim();
+        
+            if (!sport || !category || !team) return a; // Evita errores si los valores son inválidos
+        
+            if (!a[sport]) a[sport] = {}; // Inicializa el deporte
+            if (!a[sport][category]) a[sport][category] = {}; // Inicializa la categoría como array
+        
+            a[sport][category][team]=true; // Agrega el equipo
+        
+            return a;
+        }, {});
+        console.log(NewCategories)
 
-            // Añadir el deporte si no está en la lista
-            if (!result.sports.includes(sport)) {
-                result.sports.push(sport);
-            }
-
-            // Añadir la categoría con un enlace a su deporte si no existe en el objeto categories
-            if (category && !result.categories[category]) {
-                result.categories[category] = sport;
-            }
-
-            // Añadir el equipo con un enlace a su categoría si no existe en el objeto teams
-            if (team && !result.teams[team]) {
-                result.teams[team] = category;
-            }
-        });
+        
 
         // Devolver el resultado con la estructura deseada
-        return res.status(200).json(await jsonAnswer(200, null, "Categories, teams, and sports found successfully", result));
+        return res.status(200).json(await jsonAnswer(200, null, "Categories, teams, and sports found successfully", NewCategories));
     } catch (error) {
+        console.log(error)
         return res.status(500).json(await jsonAnswer(500, "The operation has failed", "-", null));
     }
 }

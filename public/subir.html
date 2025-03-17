@@ -389,13 +389,12 @@
         capa(0)
         ajax('/api/categories',{},(e)=>{
             console.log(e.data)
-            const {sports,categories,teams}=e.data;
             capa(1)
-            printCategories(sports,categories,teams);
+            printCategories(e.data);
         })
 
-        const printCategories=(sports,categories,teams)=>{
-            sports.forEach(s => {
+        const printCategories=(data)=>{
+            Object.keys(data).forEach(s => {
                 html=`
                 <div class="cat deportes" onclick="$('.deportes').css('background','#FFF');$(this).css('background','#B9FF00');$('.ligas').hide();$('.liga_${s.replaceAll(' ','').toLowerCase()}').show();$('.ligas_div').show();$('.equipos_div').hide();$('.ligas').css('background','#FFF');limpiarCamisetas()">
                     <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px"> ${traducir(s)}
@@ -403,27 +402,38 @@
                 `;
                 htmlTinderType=`<option value="${s.replaceAll(' ','').toLowerCase()}">Ver solo ${traducir(s)}</option>`;
                 $("#tinderType").append(htmlTinderType)
-                $("#deportes").append(html)
+                $("#deportes").append(html);
+
+                html_back=""
+                Object.keys(data[s]).filter(a=>!(a==='Nba' && s==='Soccer')).sort().forEach((p,i) => {
+                    console.log(p,"_",s)
+                    htmlCategory=`
+                    <div class="cat ligas liga_${s.replaceAll(' ','').toLowerCase()}" onclick="$('.ligas').css('background','#FFF');$(this).css('background','#B9FF00');$('.equipos').hide();$('.equipo_${p.replaceAll(' ','').toLowerCase()}_${s.replaceAll(' ','').toLowerCase()}').show();$('.equipos_div').show();$('.equipos').css('background','#FFF');limpiarCamisetas()">
+                        <img src="assets/images/logos/teams/${p.replaceAll(' ','').toLowerCase()}.png" style="height:30px"> ${p}
+                    </div>
+                    `;
+                    //if(s.replaceAll(' ','').toLowerCase()=='nationalteams' || s.replaceAll(' ','').toLowerCase()=='otherteams'){
+                    //html_back+=html 
+                    //}else{
+                    $("#ligas").append(htmlCategory)
+                    //}
+
+                    Object.keys(data[s][p]).sort().forEach(t => {
+                        htmlTeam=`
+                        <div class="cat equipos equipo_${p.replaceAll(' ','').toLowerCase()}_${s.replaceAll(' ','').toLowerCase()}" onclick="$('.equipos').css('background','#FFF');$(this).css('background','#B9FF00');buscarCamisetas('${t}','${s}')">
+                            <img src="assets/images/logos/teams/${t.replaceAll(' ','').toLowerCase()}.png" style="height:30px" onError="$(this).hide()"> ${t}
+                        </div>
+                        `;
+                        $("#equipos").append(htmlTeam)
+                    });
+                });
+                //$("#ligas").append(html_back)
             });
             
-            Object.keys(categories).forEach((s,i) => {
-                html=`
-                <div class="cat ligas liga_${categories[s].replaceAll(' ','').toLowerCase()}" onclick="$('.ligas').css('background','#FFF');$(this).css('background','#B9FF00');$('.equipos').hide();$('.equipo_${s.replaceAll(' ','').toLowerCase()}').show();$('.equipos_div').show();$('.equipos').css('background','#FFF');limpiarCamisetas()">
-                    <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px"> ${traducir(s)}
-                </div>
-                `;
-                $("#ligas").append(html)
-            });
             
             
-            Object.keys(teams).forEach(s => {
-                html=`
-                <div class="cat equipos equipo_${teams[s].replaceAll(' ','').toLowerCase()}" onclick="$('.equipos').css('background','#FFF');$(this).css('background','#B9FF00');buscarCamisetas('${s}')">
-                    <img src="assets/images/logos/teams/${s.replaceAll(' ','').toLowerCase()}.png" style="height:30px" onError="$(this).hide()"> ${s}
-                </div>
-                `;
-                $("#equipos").append(html)
-            });
+            
+            
         }
 
         function limpiarCamisetas(){
@@ -432,7 +442,7 @@
         }
 
         var productsData=[]
-        function buscarCamisetas(team){
+        function buscarCamisetas(team,sport){
             $('.buscadorDivButton').show();
             $(".buscadorDiv").hide()
             $("#products").html(`
@@ -441,7 +451,7 @@
             </center>`)
             $("#teamBuscado").html(`<img src="assets/images/logos/teams/${team.replaceAll(' ','').toLowerCase()}.png" style="height:30px" onError="$(this).hide()"> ${team}`)
             teamBuscar=team.toLowerCase().replaceAll(" ","")
-            ajax('/api/products',{qty:1000,team:teamBuscar},(e)=>{
+            ajax('/api/products',{qty:1000,team:teamBuscar,sport:sport.toLowerCase().replaceAll(" ","")},(e)=>{
                 products=e.data.products;
                 productsData=products;
                 $("#products").html("")
